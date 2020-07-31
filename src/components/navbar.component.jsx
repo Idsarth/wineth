@@ -1,18 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// Import components
+import DropDown from './dropdown.component'
+
 const Navbar = () => {
   return (
     <header className='navbar'>
-      <nav>
-        <div>
+      <nav className='nav'>
+        <div className='nav-brand'>
           <p>LOGO</p>
         </div>
-        <ul>
+        {/* <ul className='nav-list'>
           <li>
-            <Link to='/profile'>Profile</Link>
+            
           </li>
-        </ul>
+        </ul> */}
+        <DropDown />
       </nav>
     </header>
   )

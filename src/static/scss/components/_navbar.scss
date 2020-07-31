@@ -1,4 +1,35 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 4.5rem;
+  display: inline-block;
   grid-area: nav;
-  background-color: red;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  
+  .nav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &-brand {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        font-weight: bold;
+        font-size: 23px;
+      }
+    } 
+    &-list {
+
+    }
+  }
 }

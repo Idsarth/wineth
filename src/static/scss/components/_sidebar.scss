@@ -1,4 +1,11 @@
 .sidebar {
   grid-area: sidebar;
-  background-color: blue;
+  background-color: #1C2B36;
+
+  &-list {
+
+  }
+  &-item {
+    padding: 10px 20px;
+  }
 }

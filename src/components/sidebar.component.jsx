@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const SideBar = () => {
   return (
     <aside className='sidebar'>
-      <ul>
-        <li>
+      <ul className='sidebar-list'>
+        <li className='sidebar-item'>
           <Link to='/'>Home</Link>
         </li>
         
