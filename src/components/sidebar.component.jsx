@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   return (
-    <aside>
+    <aside className='sidebar'>
       <ul>
         <li>
           <Link to='/'>Home</Link>

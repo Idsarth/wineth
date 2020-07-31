@@ -1,0 +1,11 @@
+.layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: "nav nav" "sidebar content" "sidebar content";
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 4.5rem 1fr;
+
+  &-content {
+    grid-area: content;
+  }
+}

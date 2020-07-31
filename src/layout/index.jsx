@@ -8,10 +8,10 @@ export const Layout = (props) => {
   const { children } = props
   return (
     <>
-      <div>
+      <div className='layout'>
         <Navbar />
         <SideBar />
-        <section>
+        <section className='layout-content'>
           {children}
         </section>
       </div>
