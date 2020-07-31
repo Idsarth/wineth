@@ -7,21 +7,29 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
+    const storage = localStorage.getItem('@storage')
+    try {
+      if (storage) setUser(null)
+      setUser(JSON.parse(storage))
+    } catch (error) {
+      console.log(error)
+    } finally {
       setLoading(false)
-    }, 3000)
+    }
   }, [])
 
-  if (loading) return <p>loading....</p>
-
+  
   const signIn = useCallback((user) => {
+    localStorage.setItem('@storage', JSON.stringify(user))
     setUser(user)
   }, [])
-
+  
   const signOut = useCallback(() => {
+    localStorage.removeItem('@storage')
     setUser(null)
   }, [])
-
+  
+  if (loading) return <p>loading....</p>
   return <AuthContext.Provider value={{ user, signIn, signOut, isLoggedIn: !!user }} children={children} />
 }
 

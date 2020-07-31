@@ -1,11 +1,23 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
-const SignIn = () => {
+// Import hooks
+import { useAuth } from '../hooks/useAuth'
+
+const SignInPage = () => {
+  const { signIn, isLoggedIn } = useAuth()
+  const handle = () => signIn({ username: 'Idsarth', email: 'Idsarth@gmail.com', token: 'ESTEESUNTOKENSUPERSEGURO' })
+
+  if (isLoggedIn) return <Redirect to='/' />
+
   return (
     <div>
-      <p>SignIn</p>
+      <p>SignInPage</p>
+      <button onClick={handle}>
+        Sign In
+      </button>
     </div>
   )
 }
 
-export default SignIn
+export default SignInPage

@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isLoggedIn } = useAuth()
 
   const handle = (routeProps) => {
-    if (isLoggedIn) return <component {...routeProps} />
+    if (isLoggedIn) return <Component {...routeProps} />
 
     return <Redirect to='/sign-in' />
   }

@@ -2,31 +2,21 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Import routes
-import routes from './routes'
+import Private from './routes/private.route'
 
-// Import context
-import { AuthProvider } from './context/auth.context'
+// Import pages
+import HomePage from './pages/home.page'
+import SignInPage from './pages/signin.page'
 
 const Main = () => {
+
   return (
-    <AuthProvider>
-      <Router>
-        <Switch>
-          {routes.map(route => (
-            <Route 
-              key={route.path}
-              path={route.path}
-              exact={route.exact}
-              render={props => (
-                <route.layout>
-                  <route.component {...props} />
-                </route.layout>
-              )}
-            />
-          ))}
-        </Switch>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Switch>
+        <Route exact path='/sign-in' component={SignInPage} />
+        <Private exact path='/' component={HomePage} />
+      </Switch>
+    </Router>
   )
 }
 
