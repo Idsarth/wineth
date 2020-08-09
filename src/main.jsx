@@ -10,6 +10,7 @@ import Layout from './layout'
 // Import pages
 import HomePage from './pages/home.page'
 import SignInPage from './pages/signin.page'
+import PartnersPage from './pages/partners.page'
 
 const Main = () => {
 
@@ -19,6 +20,7 @@ const Main = () => {
         <Route exact path='/sign-in' component={SignInPage} />
         <Layout>
           <Private exact path='/' component={HomePage} />
+          <Private exact path='/partners' component={PartnersPage} />
         </Layout>
       </Switch>
     </Router>

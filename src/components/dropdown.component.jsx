@@ -27,7 +27,7 @@ const DropDown = () => {
             <Link to='#'>Profile</Link>
           </li>
           <li className='dropdown-item'>
-            <a href="#" onClick={handleLogout}>Logout</a>
+            <Link to="#" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       )}

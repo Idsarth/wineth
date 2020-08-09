@@ -13,7 +13,7 @@ const ListTile = (props) => {
                     <span>{message}</span>
                 </div>
                 {dropdown && (
-                    <IoIosArrowForward className='list-tile-icon' />
+                    <IoIosArrowForward className='list-tile-icon icon' />
                 )}
             </div>
         </Link>
