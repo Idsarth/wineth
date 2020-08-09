@@ -1,14 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { IoIosHome } from 'react-icons/io'
+
+// Import components
+import ListTile from './list-tile.component'
+
+const options = [
+    {
+        id: 1,
+        routeName: '/',
+        message: 'Dashboard',
+        icon: <IoIosHome className='list-tile-icon' />
+    },
+]
 
 const SideBar = () => {
   return (
     <aside className='sidebar'>
       <ul className='sidebar-list'>
-        <li className='sidebar-item'>
-          <Link to='/'>Home</Link>
-        </li>
-        
+          {options.map(opt => (
+              <li key={opt.id}>
+                  <ListTile
+                      message={opt.message}
+                      routeName={opt.routeName}
+                      icon={opt.icon}
+                      dropdown
+                  />
+              </li>
+          ))}
       </ul>
     </aside>
   )

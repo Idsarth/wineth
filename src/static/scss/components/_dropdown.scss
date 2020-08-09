@@ -1,5 +1,11 @@
 .dropdown {
   position: relative;
+
+  &-icon {
+    width: 20px;
+    height: 20px;
+    color: #e0e6ed;
+  }
   &-user {
     display: flex;
     cursor: pointer;
@@ -9,6 +15,7 @@
       align-items: center;
       p {
         margin-right: 5px;
+        color: #e0e6ed;
       }
     }
     img {
@@ -20,17 +27,28 @@
 
   &-list {
     position: absolute;
-    top: 4rem;
-    left: 0;
-    width: 120px;
-    background-color: #fff;
+    top: 2.8rem;
+    right: 0;
+    width: 160px;
+    background-color: #1A1C2D;
     border: 1px solid #ccc;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
   }
   &-item {
     a {
+      width: 100%;
       display: inline-block;
-      padding: 10px 18px;
+      padding: 10px 24px;
+      color: #e0e6ed;
+      transition: .6s ease-in-out;
+      border-radius: 10px;
+      &:hover {
+        transition: .6s ease-in-out;
+        background-color: #3B3F5C;
+      }
     }
   }
 }
