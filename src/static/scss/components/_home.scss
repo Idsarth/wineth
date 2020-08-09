@@ -1,0 +1,13 @@
+.home {
+  &-statistics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1.5rem;
+  }
+
+  &-icon {
+    width: 60px;
+    height: 60px;
+    color: #506690;
+  }
+}

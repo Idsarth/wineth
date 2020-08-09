@@ -1,6 +1,7 @@
 .sidebar {
   grid-area: sidebar;
   background-color: #060818;
+  border-right: 1px solid #0e1726;
 
   &-list {
     padding: 1rem;
