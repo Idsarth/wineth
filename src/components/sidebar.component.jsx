@@ -1,5 +1,7 @@
 import React from 'react'
 import { IoIosHome } from 'react-icons/io'
+import { MdAccountBalance } from 'react-icons/md';
+
 
 // Import components
 import ListTile from './list-tile.component'
@@ -10,6 +12,12 @@ const options = [
         routeName: '/',
         message: 'Dashboard',
         icon: <IoIosHome className='list-tile-icon' />
+    },
+    {
+        id: 2,
+        routeName: '/partners',
+        message: 'Partners',
+        icon: <MdAccountBalance className='list-tile-icon' />
     },
 ]
 
