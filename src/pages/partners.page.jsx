@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 // Import components
 import Chart from '../components/chart.component'
@@ -7,7 +8,8 @@ import Chart from '../components/chart.component'
 import { useFetch } from '../hooks/useAxios'
 
 const PartnersPage = () => {
-  const [{ isFetching, data, error }] = useFetch({ method: 'GET', url: `/matrix/tree/${3}` })
+  const { id } = useParams()
+  const [{ isFetching, data, error }] = useFetch({ method: 'GET', url: `/matrix/tree/${id}` })
   if (isFetching) return <div>Fetching...</div>
 
   const loadNodes = () => {

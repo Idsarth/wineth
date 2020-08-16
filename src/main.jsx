@@ -20,7 +20,7 @@ const Main = () => {
         <Route exact path='/sign-in' component={SignInPage} />
         <Layout>
           <Private exact path='/' component={HomePage} />
-          <Private exact path='/partners' component={PartnersPage} />
+          <Private exact path='/partners/:id' component={PartnersPage} />
         </Layout>
       </Switch>
     </Router>
