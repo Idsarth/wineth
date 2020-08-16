@@ -1,45 +1,65 @@
-import React, { useEffect, useRef } from 'react'
-import OrgChart from '@balkangraph/orgchart.js'
+import React, { useEffect, useState } from 'react'
+
+// Import components
+import Chart from '../components/chart.component'
 
 // Import hooks
 import { useFetch } from '../hooks/useAxios'
 
-const Chart = (props) => {
-  const _chart = useRef(null)
-  useEffect(() => {
-    if (_chart.current !== null) {
-      new OrgChart(
-        _chart.current,
-        {
-          template: 'olivia',
-          nodes: props.nodes,
-          nodeBinding: {
-            field_0: 'name',
-            field_1: 'title'
-          }
-        })
-    }
-  }, [props.nodes])
-
-  return (
-    <div id='tree' ref={_chart} />
-  )
-}
-
 const PartnersPage = () => {
-  const [{ isFetching, data, error }] = useFetch({ method: 'GET', url: `/matrix/tree/${1}` })
-  useEffect(() => {
-    console.log(isFetching, data, error)
-  }, [isFetching, data, error])
+  const [{ isFetching, data, error }] = useFetch({ method: 'GET', url: `/matrix/tree/${3}` })
+  if (isFetching) return <div>Fetching...</div>
+
+  const loadNodes = () => {
+    let counter = 1
+    const nodes = [{ id: counter }]
+
+    data.treeView.level1.map(level => {
+      ++counter
+      nodes.push({ id: counter, pid: 1, wallet: level.sponsors.referers.referer.wallet })
+    })
+
+    data.treeView.level2.slice(0,2).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 2, wallet: level.sponsors.referers.referer.wallet })
+    })
+    data.treeView.level2.slice(2,4).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 3, wallet: level.sponsors.referers.referer.wallet })
+    })
+
+    data.treeView.level3.slice(0,2).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 4, wallet: level.sponsors.referers.referer.wallet })
+    })
+    data.treeView.level3.slice(2,4).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 5, wallet: level.sponsors.referers.referer.wallet })
+    })
+    data.treeView.level3.slice(4,6).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 6, wallet: level.sponsors.referers.referer.wallet })
+    })
+    data.treeView.level3.slice(6,8).map((level, index) => {
+      ++counter
+      nodes.push({ id: counter, pid: 7, wallet: level.sponsors.referers.referer.wallet })
+    })
+
+    // console.log(data.treeView.level2.slice(0,2).map(level => level.sponsors.referers.referer.id))
+    // console.log(data.treeView.level2.slice(2,4).map(level => level.sponsors.referers.referer.id))
+    // console.log(data.treeView.level3.slice(0,2).map(level => level.sponsors.referers.referer.id))
+    // console.log(data.treeView.level3.slice(2,4).map(level => level.sponsors.referers.referer.id))
+    // console.log(data.treeView.level3.slice(4,6).map(level => level.sponsors.referers.referer.id))
+    // console.log(data.treeView.level3.slice(6,8).map(level => level.sponsors.referers.referer.id))
+    // console.log(nodes)
+    // console.log(data.treeView)
+    return nodes
+  }
 
   return (
-    <div>
-      <Chart
-        nodes={[{id: 1, name: "Name1" , title: "Tytle1" },
-          {id: 2, pid: 1, name: "Name2" , title: "Tytle2" },
-          {id: 3, pid: 1, name: "Name3" , title: "Tytle3" }]}
-      />
-    </div>
+    <Chart
+      nodes={loadNodes()}
+    />
   )
 }
 
