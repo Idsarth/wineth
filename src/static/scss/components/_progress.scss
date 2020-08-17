@@ -1,0 +1,43 @@
+.progress {
+  background-color: #fbfbfe;
+  border-radius: 15px;
+  padding: 1.5rem 2rem;
+  position: relative;
+  &-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .content-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      height: 8px;
+      width: 40px;
+      background-color: #1b2e4b;
+    }
+  }
+  &-indicator, &-indicator-active {
+    background-color: #1b2e4b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fbfbfe;
+    font-size: 1.2rem;
+  }
+
+  &-indicator-active {
+    background-color: #0A51A1;
+  }
+
+}

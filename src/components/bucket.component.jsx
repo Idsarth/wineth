@@ -3,9 +3,10 @@ import { FaEthereum } from 'react-icons/fa'
 
 // Import components
 import Button from './button.component'
+import Loader from './loader.component'
 
 const Bucket = (props) => {
-  const { name, price, id } = props
+  const { name, price, id, onClick, isLoading, bucketId } = props
   return (
     <div className='bucket'>
       <div className='bucket-img'>
@@ -20,10 +21,14 @@ const Bucket = (props) => {
             <span className='bucket-price'>{price}</span>
           </span>
         </div>
-        <Button
-          message='Activar'
-          onClick={console.log}
-        />
+        {isLoading && id === bucketId ? (
+          <Loader />
+        ) : (
+          <Button
+            message='Activar'
+            onClick={onClick}
+          />
+        )}
       </div>
     </div>
   )

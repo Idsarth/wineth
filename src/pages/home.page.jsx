@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 
 // Import context
 // import { useAuth } from '../hooks/useAuth'
@@ -6,11 +6,37 @@ import React from 'react'
 // Import components
 import ListOfStatistics from '../components/list/list-of-statistics'
 import ListOfBucket from '../components/list/list-of-bucket.component'
+import Modal from '../components/modal.component'
+import ProgressPayment from '../components/progress-payment.component'
 
 import Particle from '../components/particle.component'
 
+// Import hooks
+import { useFetch } from '../hooks/useAxios'
+
 const HomePage = () => {
-  // const { user } = useAuth()
+  const [show, setShow]  = useState(false)
+  const [bucketId, setBucketId] = useState()
+  const [{ data, isFetching }, execute] = useFetch({ method: 'GET', url: `/sponsors/${bucketId}` }, false)
+
+  const handleShow = (show, id) => {
+    setShow(show)
+    setBucketId(id)
+  }
+
+  useEffect(() => {
+    if (bucketId) execute()
+  }, [bucketId])
+
+  const ListBucket = useMemo(() => {
+    return (
+      <Modal
+        onClosed={() => setShow(prevState => !prevState)}
+        className={show && 'active'}>
+        <ProgressPayment isFetching={isFetching} data={data} />
+      </Modal>
+    )
+  }, [show, isFetching, data])
 
   return (
     <div>
@@ -18,7 +44,7 @@ const HomePage = () => {
         <ListOfStatistics />
       </div>
       <main className='l-main'>
-        <ListOfBucket />
+        <ListOfBucket onModal={handleShow} />
       </main>
 
       <Particle
@@ -74,6 +100,7 @@ const HomePage = () => {
           }
         }}
       />
+      {ListBucket}
     </div>
   )
 }
