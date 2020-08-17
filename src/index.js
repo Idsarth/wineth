@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import Main from './main';
 import { AuthProvider } from './context/auth.context'
 
-import * as serviceWorker from './serviceWorker';
+import Main from './main'
+import Boundary from './exceptions/boundary.component'
+
+import ErrorPage from './pages/error.page'
+
+import * as serviceWorker from './serviceWorker'
 import './static/scss/styles.scss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <Main />
-    </AuthProvider>
+    <Boundary fallback={<ErrorPage />}>
+      <AuthProvider>
+        <Main />
+      </AuthProvider>
+    </Boundary>
   </React.StrictMode>,
   document.getElementById('root')
 );

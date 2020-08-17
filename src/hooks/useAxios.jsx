@@ -1,36 +1,34 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useStorage } from './useStorage'
 
 // Import utils
 import { Env } from '../utils'
 
 export const useFetch = ({ url, body, method }, immediate = true) => {
-  const { storage } = useStorage('@storage::token', '')
-  const [isFetching, setIsFetching] = useState(true)
-  const [error, setError] = useState({ hasError: false, message: '' })
+  const [isFetching, setIsFetching] = useState(immediate)
+  const [error, setError] = useState('')
   const [data, setData] = useState({})
   const [reFetch, setRefetch] = useState(false)
 
-  const execute = useCallback(async () => {
+  const execute = useCallback(async (data) => {
     try {
       const headers = new Headers()
-      headers.append('Content-Type', 'Application/json')
-      headers.append('Authorization', `${storage}`)
-
+      headers.append('Content-Type', 'application/json')
+      // headers.append('Authorization', `${storage}`)
+      setIsFetching(true)
       const response = await fetch(`${Env.SERVER_ADDRESS}${url}`,
         {
           headers,
           method,
-          body: JSON.stringify(body)
+          body: data ? JSON.stringify(data) : JSON.stringify(body)
         })
       const result = await response.json()
       setData(result)
     } catch (error) {
-      setError({ hasError: true, message: error.toString() })
+      setError(error.toString())
     } finally {
       setIsFetching(false)
     }
-  }, [])
+  }, [url, body, method])
 
   useEffect(() => {
     if (immediate || reFetch) execute()

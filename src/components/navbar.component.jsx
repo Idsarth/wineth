@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IoIosMenu } from 'react-icons/io'
 
 // Import logo
 import logo from '../static/img/logo.png'
