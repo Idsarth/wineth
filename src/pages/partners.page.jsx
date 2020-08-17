@@ -11,10 +11,13 @@ const PartnersPage = () => {
   const { id } = useParams()
   const [{ isFetching, data, error }] = useFetch({ method: 'GET', url: `/matrix/tree/${id}` })
   if (isFetching) return <div>Fetching...</div>
+  if (error) return null
 
   const loadNodes = () => {
     let counter = 1
     const nodes = [{ id: counter }]
+
+    if (data?.status === 400) return []
 
     data.treeView.level1.map(level => {
       ++counter
@@ -46,15 +49,6 @@ const PartnersPage = () => {
       ++counter
       nodes.push({ id: counter, pid: 7, wallet: level.sponsors.referers.referer.wallet })
     })
-
-    // console.log(data.treeView.level2.slice(0,2).map(level => level.sponsors.referers.referer.id))
-    // console.log(data.treeView.level2.slice(2,4).map(level => level.sponsors.referers.referer.id))
-    // console.log(data.treeView.level3.slice(0,2).map(level => level.sponsors.referers.referer.id))
-    // console.log(data.treeView.level3.slice(2,4).map(level => level.sponsors.referers.referer.id))
-    // console.log(data.treeView.level3.slice(4,6).map(level => level.sponsors.referers.referer.id))
-    // console.log(data.treeView.level3.slice(6,8).map(level => level.sponsors.referers.referer.id))
-    // console.log(nodes)
-    // console.log(data.treeView)
     return nodes
   }
 

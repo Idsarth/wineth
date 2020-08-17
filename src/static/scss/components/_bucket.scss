@@ -8,10 +8,32 @@
   &-img {
     width: 15rem;
   }
-  span {
 
+  &-footer {
+    //width: 100%;
+    //padding: 0 4rem;
   }
-  p {
 
+  &-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0.6rem;
+    }
+  }
+
+  &-price {
+    font-size: 1.5rem;
+  }
+  &-icon {
+    font-size: 1.5rem;
+    margin-right: 0.1rem;
   }
 }

@@ -10,6 +10,21 @@ body {
   color:#888ea8;
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: #283048;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  width: 10px;
+  background-color: #757F9A;
+  &:hover {
+    background-color: #0A51A1;
+  }
+}
+
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
 }

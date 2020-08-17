@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaEthereum } from 'react-icons/fa'
+
 // Import components
 import Button from './button.component'
 
@@ -11,8 +13,13 @@ const Bucket = (props) => {
       </div>
 
       <div className='bucket-footer'>
-        <p>{name}</p>
-        <span>{price}</span>
+        <div className='bucket-details'>
+          <p>{name}</p>
+          <span>
+            <FaEthereum className='bucket-icon' />
+            <span className='bucket-price'>{price}</span>
+          </span>
+        </div>
         <Button
           message='Activar'
           onClick={console.log}
