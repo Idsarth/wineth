@@ -1,9 +1,14 @@
 @import "./base/base";
+
+@import "./global/global";
+
 @import "./components/navbar";
 @import "./components/sidebar";
 @import "./components/dropdown.scss";
-@import "components/list-tile";
+@import "./components/list-tile";
 @import "./components/card";
 @import "./components/home";
+@import "./components/button";
+@import "./components/error";
 
 @import "./layout/layout";

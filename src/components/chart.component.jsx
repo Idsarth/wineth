@@ -3,13 +3,11 @@ import OrgChart from '@balkangraph/orgchart.js'
 
 const Chart = (props) => {
   const _chart = useRef(null)
-  console.log(props.nodes)
   useEffect(() => {
     if (_chart.current !== null) {
       new OrgChart(
         _chart.current,
         {
-          // template: 'base',
           template: 'olivia',
           enableSearch: false,
           nodeMouseClick: OrgChart.action.none,

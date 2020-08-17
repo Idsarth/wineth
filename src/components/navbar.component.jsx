@@ -13,23 +13,22 @@ const Navbar = () => {
     <header className='navbar'>
       <nav className='nav'>
         <div className='nav-left'>
-            <div>
-                <IoIosMenu className='nav-menu' />
-                <ol className='nav-breadcrumb'>
-                    <li>
-                        <Link to='/'>Dashboard</Link>
-                    </li>
-                    <span>/</span>
-                    <li>
-                        <Link to='/'>Profile</Link>
-                    </li>
-                </ol>
-            </div>
-            <div className='nav-brand'>
-                <Link to='/'>
-                    <img src={logo} alt='Logo wineth' />
-                </Link>
-            </div>
+          <div>
+            <ol className='nav-breadcrumb'>
+              <li>
+                <Link to='/'>Dashboard</Link>
+              </li>
+              <span>/</span>
+              <li>
+                <Link to='/'>Profile</Link>
+              </li>
+            </ol>
+          </div>
+          <div className='nav-brand'>
+            <Link to='/'>
+              <img src={logo} alt='Logo wineth' />
+            </Link>
+          </div>
         </div>
         <DropDown />
       </nav>

@@ -1,0 +1,25 @@
+.button {
+  padding: .6rem 3rem;
+  background-color: #0A51A1;
+  color: #fbfbfe;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 300px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: #145fb4;
+  }
+  &-outline {
+    border: 1px solid #0A51A1;
+    color: #0A51A1;
+    background-color: transparent;
+
+    &:hover {
+      color: #fbfbfe;
+    }
+  }
+}
