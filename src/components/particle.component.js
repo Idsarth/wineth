@@ -1,29 +1,14 @@
 import React from 'react'
 import Particles from 'react-particles-js'
 
-const Particle = () => {
+const Particle = (props) => {
+  const { params } = props
+
   return (
     <div className='particle'>
       <Particles
         className='particles'
-        params={{
-          "particles": {
-            "number": {
-              "value": 50
-            },
-            "size": {
-              "value": 3
-            }
-          },
-          "interactivity": {
-            "events": {
-              "onhover": {
-                "enable": true,
-                "mode": "repulse"
-              }
-            }
-          }
-        }}
+        params={params}
       />
     </div>
   )

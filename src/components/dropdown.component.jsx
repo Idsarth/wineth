@@ -24,9 +24,6 @@ const DropDown = () => {
       {show && (
         <ul className='dropdown-list'>
           <li className='dropdown-item'>
-            <Link to='#'>Profile</Link>
-          </li>
-          <li className='dropdown-item'>
             <Link to="#" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>

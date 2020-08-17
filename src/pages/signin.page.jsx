@@ -46,7 +46,7 @@ const SignInPage = () => {
         if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
         if (accounts[0] !== null) {
           setAccounts(accounts[0])
-          execute({ wallet: accounts[0] + 2 })
+          execute({ wallet: accounts[0] })
         }
       })
   }
@@ -80,7 +80,26 @@ const SignInPage = () => {
           </>
         )}
       </form>
-      <Particle/>
+      <Particle
+        params={{
+          "particles": {
+            "number": {
+              "value": 50
+            },
+            "size": {
+              "value": 3
+            }
+          },
+          "interactivity": {
+            "events": {
+              "onhover": {
+                "enable": true,
+                "mode": "repulse"
+              }
+            }
+          }
+        }}
+      />
     </div>
   )
 }

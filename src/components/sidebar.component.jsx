@@ -1,10 +1,14 @@
 import React from 'react'
 import { IoIosHome } from 'react-icons/io'
-import { MdAccountBalance } from 'react-icons/md';
+import { MdAccountBalance } from 'react-icons/md'
+import { decode } from 'jsonwebtoken'
 
 
 // Import components
 import ListTile from './list-tile.component'
+
+// Import hooks
+import { useAuth } from '../hooks/useAuth'
 
 const options = [
   {
@@ -15,13 +19,15 @@ const options = [
   },
   {
     id: 2,
-    routeName: '/partners/1',
+    routeName: `/partners`,
     message: 'Partners',
     icon: <MdAccountBalance className='list-tile-icon' />
   },
 ]
 
 const SideBar = () => {
+  const { user } = useAuth()
+
   return (
     <aside className='sidebar'>
       <ul className='sidebar-list'>
@@ -29,7 +35,11 @@ const SideBar = () => {
           <li key={opt.id}>
             <ListTile
               message={opt.message}
-              routeName={opt.routeName}
+              routeName={
+                opt.routeName === '/partners'
+                  ? `${opt.routeName}/${decode(user.token).id}`
+                  : opt.routeName
+              }
               icon={opt.icon}
               dropdown
             />

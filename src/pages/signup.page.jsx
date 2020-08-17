@@ -9,6 +9,7 @@ import logo from '../static/img/logo.png'
 import Particle from '../components/particle.component'
 import Error from '../components/error.component'
 import Button from '../components/button.component'
+import Loader from '../components/loader.component'
 
 // Import hooks
 import { useAuth } from '../hooks/useAuth'
@@ -66,11 +67,15 @@ const SignUpPage = () => {
         />
         {error.hasError && <Error className='bottom' message={error.message} />}
         <span className='form-message'>Inicia sesion con metamask para continuar.</span>
-        <Button
-          variant
-          message='Login con Metamask'
-          onClick={onSubmit}
-        />
+        {isFetching ? (
+          <Loader />
+        ) : (
+          <Button
+            variant
+            message='Login con Metamask'
+            onClick={onSubmit}
+          />
+        )}
       </form>
       <Particle />
     </div>
