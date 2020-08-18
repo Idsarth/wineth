@@ -2,9 +2,8 @@ import Web3 from 'web3'
 
 export const convert = (amount) => {
   try {
-    const weiValue = Web3.utils.toWei(amount, 'ether')
-    console.log(weiValue)
-    return Web3.utils.fromWei(weiValue, 'ether')
+    // const web3 = new Web3(Web3.givenProvider)
+    return Web3.utils.toWei(`${amount}`, 'ether')
   } catch (error) {
     console.log(error.toString())
   }

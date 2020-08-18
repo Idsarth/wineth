@@ -51,3 +51,37 @@
 .bottom {
   margin-bottom: 2rem;
 }
+
+.shimmer-effect {
+  height: 130px;
+  width: 100%;
+  background: #090b1f;
+  background-image: linear-gradient(to right, #090b1f 0%, darken(#090b1f, 0.5) 20%, #090b1f 40%, #090b1f 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+
+  animation-name: shimmer;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  @keyframes shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+}
+
+.loader-bucket {
+  height: 700px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

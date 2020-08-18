@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { decode } from 'jsonwebtoken'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 // Import logo
 import logo from '../static/img/logo.png'
@@ -7,7 +9,12 @@ import logo from '../static/img/logo.png'
 // Import components
 import DropDown from './dropdown.component'
 
+// Import hooks
+import { useAuth } from '../hooks/useAuth'
+
 const Navbar = () => {
+  const [copy, setCopy] = useState(false)
+  const { user } = useAuth()
   return (
     <header className='navbar'>
       <nav className='nav'>
@@ -18,9 +25,6 @@ const Navbar = () => {
                 <Link to='/'>Dashboard</Link>
               </li>
               <span>/</span>
-              <li>
-                <Link to='/'>Profile</Link>
-              </li>
             </ol>
           </div>
           <div className='nav-brand'>
@@ -28,6 +32,12 @@ const Navbar = () => {
               <img src={logo} alt='Logo wineth' />
             </Link>
           </div>
+          <ul>
+            <li>http://localhost/sign-up/{decode(user?.token).id}</li>
+            {/*<CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost/sign-up/${decode(user?.token).id}`}>*/}
+            {/*  copiar*/}
+            {/*</CopyToClipboard>*/}
+          </ul>
         </div>
         <DropDown />
       </nav>

@@ -32,11 +32,11 @@ const HomePage = () => {
     return (
       <Modal
         onClosed={() => setShow(prevState => !prevState)}
-        className={show && 'active'}>
-        <ProgressPayment isFetching={isFetching} data={data} />
+        className={show ? 'active' : ''}>
+        <ProgressPayment isFetching={isFetching} data={data} bucketId={bucketId} />
       </Modal>
     )
-  }, [show, isFetching, data])
+  }, [show, isFetching, data, bucketId])
 
   return (
     <div>
@@ -100,7 +100,7 @@ const HomePage = () => {
           }
         }}
       />
-      {ListBucket}
+      {data?.AscendingLine && ListBucket}
     </div>
   )
 }

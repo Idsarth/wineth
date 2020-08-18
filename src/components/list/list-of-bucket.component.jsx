@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 // Import components
 import Bucket from '../bucket.component'
+import Loader from '../loader.component'
 
 // Import hooks
 import { useFetch } from '../../hooks/useAxios'
@@ -19,7 +20,11 @@ const ListOfBucket = (props) => {
     setBucketId(id)
     execute()
   }
-  if (isFetching) return <p>loading...</p>
+  if (isFetching) return (
+    <div className='loader-bucket'>
+      <Loader />
+    </div>
+  )
   return (
     <>
       {data.buckets.map(bucket => (

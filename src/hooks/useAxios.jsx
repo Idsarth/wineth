@@ -29,7 +29,6 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
       setData(result)
     } catch (error) {
       setError(error.toString())
-      console.log(error.toString())
     } finally {
       setIsFetching(false)
     }

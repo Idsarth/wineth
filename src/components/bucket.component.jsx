@@ -10,7 +10,7 @@ const Bucket = (props) => {
   return (
     <div className='bucket'>
       <div className='bucket-img'>
-        <img src={require(`../static/img/bucket_${id}.png`)}/>
+        <img src={require(`../static/img/bucket_${id}.png`)} alt='bucket wineth'/>
       </div>
 
       <div className='bucket-footer'>
@@ -22,7 +22,9 @@ const Bucket = (props) => {
           </span>
         </div>
         {isLoading && id === bucketId ? (
-          <Loader />
+          <div className='bucket-loader'>
+            <Loader />
+          </div>
         ) : (
           <Button
             message='Activar'

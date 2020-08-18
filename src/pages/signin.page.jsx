@@ -36,7 +36,7 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
-    if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts })
+    if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts, isActive: data.isActiveBucket })
   }, [errorNetwork, data])
 
   const onSubmit = () => {

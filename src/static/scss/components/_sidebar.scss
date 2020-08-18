@@ -1,4 +1,9 @@
 .sidebar {
+  position: fixed;
+  top: 3.6rem;
+  left: 0;
+  width: 15%;
+  height: 100%;
   grid-area: sidebar;
   background-color: #060818;
   border-right: 1px solid #0e1726;
