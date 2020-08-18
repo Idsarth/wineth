@@ -17,7 +17,7 @@ import { useFetch } from '../hooks/useAxios'
 const HomePage = () => {
   const [show, setShow]  = useState(false)
   const [bucketId, setBucketId] = useState()
-  const [{ data, isFetching }, execute] = useFetch({ method: 'GET', url: `/sponsors/${bucketId}` }, false)
+  const [{ data, isFetching }, execute] = useFetch({ method: 'GET', url: `/matrix/sponsors/${bucketId}` }, false)
 
   const handleShow = (show, id) => {
     setShow(show)

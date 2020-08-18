@@ -17,7 +17,7 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
     try {
       const headers = new Headers()
       headers.append('Content-Type', 'application/json')
-      headers.append('auth-token', `${user.token}`)
+      headers.append('auth-token', `${user?.token}`)
       setIsFetching(true)
       const response = await fetch(`${Env.SERVER_ADDRESS}${url}`,
         {
@@ -29,6 +29,7 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
       setData(result)
     } catch (error) {
       setError(error.toString())
+      console.log(error.toString())
     } finally {
       setIsFetching(false)
     }

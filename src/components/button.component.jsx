@@ -6,7 +6,7 @@ const Button = (props) => {
     <input
       type='button'
       value={message}
-      className={`button ${variant && 'button-outline'}`}
+      className={`button ${variant ? 'button-outline' : ''}`}
       onClick={onClick}
     />
   )
