@@ -1,17 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import logo from '../static/img/logo.png'
 
 // Import components
 import Button from '../components/button.component'
 
 const ErrorPage = () => {
   return (
-    <div>
-      <p>Opppsss, ocurrio un error</p>
-
-      <Link to='/'>
+    <div className='l-error'>
+      <img src={logo} alt='Wineth' />
+      <p>Opppsss, ocurrio un error...</p>
+      <a href='/sign-in'>
         <Button message='Sacame de aqui' onClick={() => {}} />
-      </Link>
+      </a>
     </div>
   )
 }

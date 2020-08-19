@@ -15,9 +15,8 @@ const PartnersPage = () => {
 
   const loadNodes = () => {
     let counter = 1
-    const nodes = [{ id: counter }]
-
     if (data?.status === 400) return []
+    const nodes = [{ id: counter }]
 
     data.treeView.level1.map(level => {
       ++counter

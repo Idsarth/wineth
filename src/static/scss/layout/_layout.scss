@@ -29,3 +29,17 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.l-error {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 8rem;
+    margin-bottom: 2rem;
+  }
+}

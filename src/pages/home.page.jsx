@@ -33,7 +33,7 @@ const HomePage = () => {
       <Modal
         onClosed={() => setShow(prevState => !prevState)}
         className={show ? 'active' : ''}>
-        <ProgressPayment isFetching={isFetching} data={data} bucketId={bucketId} />
+        <ProgressPayment onClose={setShow} isFetching={isFetching} data={data} bucketId={bucketId} />
       </Modal>
     )
   }, [show, isFetching, data, bucketId])

@@ -32,12 +32,14 @@ const Navbar = () => {
               <img src={logo} alt='Logo wineth' />
             </Link>
           </div>
-          <ul>
-            <li>http://localhost/sign-up/{decode(user?.token).id}</li>
-            {/*<CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost/sign-up/${decode(user?.token).id}`}>*/}
-            {/*  copiar*/}
-            {/*</CopyToClipboard>*/}
-          </ul>
+          {user?.isActive && (
+            <ul>
+              <li>http://localhost/sign-up/{decode(user?.token).id}</li>
+              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost/sign-up/${decode(user?.token).id}`}>
+                <span>copiar</span>
+              </CopyToClipboard>
+            </ul>
+          )}
         </div>
         <DropDown />
       </nav>
