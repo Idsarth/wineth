@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoMdArrowDropdown } from 'react-icons/io'
+import { FaEthereum } from 'react-icons/fa'
 
 // Import hooks
 import { useAuth } from '../hooks/useAuth'
@@ -16,7 +17,9 @@ const DropDown = () => {
     <div className='dropdown'>
       <div onClick={toggle} className='dropdown-user'>
         <div>
-          <p>{user?.account}</p>
+          {user?.account ? (
+            <p>{user?.account}</p>
+          ) : ( <FaEthereum className='dropdown-icon' /> )}
           <IoMdArrowDropdown className='dropdown-icon' />
         </div>
       </div>

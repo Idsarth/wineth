@@ -19,11 +19,14 @@ const SignInPage = () => {
   const { signIn, isLoggedIn } = useAuth()
   const [systemId, setSystemId] = useState('')
   const [accounts, setAccounts] = useState('')
-  const [{ error: errorNetwork, isFetching, data }, execute] = useFetch({
-    url: '/auth/signin',
-    method: 'POST'
-  }, false)
+  const [{ error: errorNetwork, isFetching, data }, execute] = useFetch({ url: '/auth/signin', method: 'POST' }, false)
+  const [{ isFetching: isLoading, data: response }, load] = useFetch({ url: '/auth/withid/signin', method: 'POST' }, false)
   const [error, setError] = useState({hasError: false, message: ''})
+
+  useEffect(() => {
+    if (response?.status === 200) signIn({ id: systemId })
+    if (response?.status === 400) setError({ hasError: true, message: 'System Id is not valid.' })
+  }, [response])
 
   useEffect(() => {
     const detectProvider = async () => {
@@ -50,6 +53,11 @@ const SignInPage = () => {
         }
       })
   }
+
+  const onSubmitSystemId = () => {
+    if (!systemId) return setError({ hasError: true, message: 'Enter the system id.' })
+    load({ id: systemId })
+  }
   if (data?.status === 400) return <Redirect to='/sign-up' />
   if (isLoggedIn) return <Redirect to='/'/>
 
@@ -65,18 +73,10 @@ const SignInPage = () => {
           onChange={setSystemId}
         />
         {error.hasError && <Error className='bottom' message={error.message}/>}
-
-        {isFetching ? ( <Loader/> ) : (
+        {isFetching || isLoading ? ( <Loader/> ) : (
           <>
-            <Button
-              variant
-              message='Login con Metamask'
-              onClick={onSubmit}
-            />
-            <Button
-              onClick={console.log}
-              message='Ingresar'
-            />
+            <Button variant message='Login con Metamask' onClick={onSubmit} />
+            <Button onClick={onSubmitSystemId} message='Ingresar' />
           </>
         )}
       </form>

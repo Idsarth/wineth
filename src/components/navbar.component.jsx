@@ -33,11 +33,10 @@ const Navbar = () => {
             </Link>
           </div>
           {user?.isActive && (
-            <ul>
-              <li>http://localhost:3000/sign-up/{decode(user?.token).id}</li>
-              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000.dev.19
-              /sign-up/${decode(user?.token).id}`}>
-                <span>copiar</span>
+            <ul className='nav-referer'>
+              <li className='nav-link'>http://localhost:3000/sign-up/{decode(user?.token).id}</li>
+              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000/sign-up/${decode(user?.token).id}`}>
+                <span className='nav-copy'>Copiar</span>
               </CopyToClipboard>
             </ul>
           )}
