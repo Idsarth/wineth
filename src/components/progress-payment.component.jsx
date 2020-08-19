@@ -15,9 +15,6 @@ import Process from './process.component'
 import { useAuth } from '../hooks/useAuth'
 import { useFetch } from '../hooks/useAxios'
 
-// Import utils
-import { convert } from '../utils'
-
 const web3 = new Web3(Web3.givenProvider)
 const ProgressPayment = (props) => {
   const { user, reload } = useAuth()
@@ -32,13 +29,16 @@ const ProgressPayment = (props) => {
       wallet: data?.AscendingLine?.nivel1?.address,
       userId: data?.AscendingLine?.nivel1?.user,
       wei: data?.AscendingLine?.nivel1?.wei,
-      status: data?.AscendingLine?.nivel1?.statusLevel1
+      status: data?.AscendingLine?.nivel1?.status
     },
     message: ''
   })
 
   useEffect(() => {
-    if (transaction.step === 4 && !isLoading) reload({ token: user?.token, isActive: true, account: user.account })
+    if (transaction.step === 4 && !isLoading) {
+      reload({ token: user?.token, isActive: true, account: user.account })
+      onClose(prevState => !prevState)
+    }
   }, [transaction.step])
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const ProgressPayment = (props) => {
             wallet: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.address,
             userId: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.user,
             wei: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.wei,
-            status: data?.AbortSignal?.[`nivel${prevState.step + 1}`]?.status
+            status: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.status
           }
         }
       })
@@ -68,6 +68,12 @@ const ProgressPayment = (props) => {
       value: web3.utils.toWei(`${transaction.info.amount}`, 'ether')
     })
     setIsReady(true)
+    setTransaction(prevState => {
+      return {
+        ...prevState,
+        message: 'Por favor espere, esperando confirmacion.'
+      }
+    })
     web3.eth.sendTransaction({
       from: user.account,
       to: transaction.info.wallet,
@@ -107,75 +113,6 @@ const ProgressPayment = (props) => {
         }
       }))
       .finally(() => setIsReady(false))
-    // setTimeout(() => {
-    //   const hash = '0x7950e2b2d6ce7eb314f5e0a0ce4cfd1489503117'
-    //   const params = {
-    //     from: user.account,
-    //     to: transaction.info.wallet,
-    //     value: `${transaction.info.wei}`,
-    //   }
-    //   const transactionInfo = {
-    //     hash,
-    //     amount: data?.AscendingLine?.[`nivel${transaction.step}`]?.amount,
-    //     walletReceived: data?.AscendingLine?.[`nivel${transaction.step}`]?.address,
-    //     bucketId,
-    //     receivedId: data?.AscendingLine?.[`nivel${transaction.step}`]?.user
-    //   }
-    //   console.log('transaction => ', transactionInfo)
-    //   setTransaction(prevState => {
-    //     return {
-    //       ...prevState,
-    //       step: prevState.step + 1,
-    //       info: {
-    //         amount: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.amount,
-    //         wallet: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.address,
-    //         userId: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.user,
-    //         wei: data?.AscendingLine?.[`nivel${prevState.step + 1}`]?.wei,
-    //         status: data?.AbortSignal?.[`nivel${prevState.step + 1}`]?.statusLevel1,
-    //       }
-    //     }
-    //   })
-    // }, 3000)
-
-
-    // console.log({
-    //   from: user.account,
-    //   to: transaction.info.wallet,
-    //   value: convert(transaction.info.amount)
-    // })
-    // window.ethereum
-    //   .request({
-    //     method: 'eth_sendTransaction',
-    //     params: [{
-    //       from: user.account,
-    //       to: transaction.info.wallet,
-    //       value: convert(transaction.info.amount),
-    //     }]
-    //   })
-    //   .then(hash => {
-    //     execute({
-    //       hash,
-    //       amount: transaction.info.amount,
-    //       walletReceived: transaction.info.wallet,
-    //       bucketId,
-    //       receiveId: transaction.info.userId
-    //     })
-    //     setTransaction(prevState => {
-    //       return {
-    //         ...prevState,
-    //         message: 'Verificando transaccion...'
-    //       }
-    //     })
-    //   })
-    //   .catch((error) => setTransaction(prevState => {
-    //     return {
-    //       ...prevState,
-    //       error: {
-    //         hasError: true,
-    //         message: 'Error when proceeding with payment'
-    //       }
-    //     }
-    //   }))
   }
 
   if(isFetching || isLoading || isReady) return (
@@ -184,11 +121,9 @@ const ProgressPayment = (props) => {
       <p className='progress-message'>{transaction.message}</p>
     </div>
   )
-  if (transaction.step === 4 && !isLoading) return onClose(prevState => !prevState)
   return (
     <div style={{ height: transaction.error.hasError ? 400 : 300 }} className='progress'>
       <img className='progress-img' src={logo} alt="wineth"/>
-      {/*<p style={{ fontSize: 40, color: 'red' }}>{transaction.step}</p>*/}
       <Process step={transaction.step} />
       <section className='progress-section'>
         <div className='progress-details'>

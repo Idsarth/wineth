@@ -101,6 +101,7 @@ const HomePage = () => {
         }}
       />
       {data?.AscendingLine && ListBucket}
+      {/*{ListBucket}*/}
     </div>
   )
 }

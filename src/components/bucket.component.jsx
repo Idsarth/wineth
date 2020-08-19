@@ -26,10 +26,7 @@ const Bucket = (props) => {
             <Loader />
           </div>
         ) : (
-          <Button
-            message='Activar'
-            onClick={onClick}
-          />
+          <Button message='Activar' onClick={onClick} />
         )}
       </div>
     </div>

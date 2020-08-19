@@ -34,8 +34,9 @@ const Navbar = () => {
           </div>
           {user?.isActive && (
             <ul>
-              <li>http://localhost/sign-up/{decode(user?.token).id}</li>
-              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost/sign-up/${decode(user?.token).id}`}>
+              <li>http://localhost:3000/sign-up/{decode(user?.token).id}</li>
+              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000.dev.19
+              /sign-up/${decode(user?.token).id}`}>
                 <span>copiar</span>
               </CopyToClipboard>
             </ul>
