@@ -10,7 +10,7 @@ import { useAuth } from '../hooks/useAuth'
 
 const Bucket = (props) => {
   const { user } = useAuth()
-  const { name, price, id, onClick, isLoading, bucketId, active, expire } = props
+  const { name, price, id, onClick, isLoading, bucketId, active, expire, isEnabled } = props
   return (
     <div className='bucket'>
       <div className='bucket-img'>
@@ -36,7 +36,7 @@ const Bucket = (props) => {
               <div className='bucket-loader'>
                 <Loader />
               </div>
-            ) : ( <Button disabled={active} message='Activar' onClick={onClick} /> )}
+            ) : ( <Button disabled={active || !isEnabled} message='Activar' onClick={onClick} /> )}
           </>
         ) : null}
       </div>

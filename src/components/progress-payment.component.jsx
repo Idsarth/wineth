@@ -20,6 +20,7 @@ const ProgressPayment = (props) => {
   const { user, reload } = useAuth()
   const { isFetching, data, bucketId, onClose, refetch } = props
   const [isReady, setIsReady] = useState(false)
+  const [close, setClose] = useState(1)
   const [{ isFetching: isLoading, data: response }, execute] = useFetch({ url: '/transaction/validate', method: 'POST' }, false)
   const [transaction, setTransaction] = useState({
     step: 1,
@@ -35,17 +36,32 @@ const ProgressPayment = (props) => {
   })
 
   useEffect(() => {
-    if (transaction.step === 4 && !isLoading) {
+    if (close === 3 && !isLoading) {
       reload({ token: user?.token, isActive: true, account: user.account })
       refetch(true)
       onClose(prevState => !prevState)
     }
-  }, [transaction.step])
+  }, [close])
 
   useEffect(() => {
     if(response?.status === 400) setTransaction(prevState => ({ ...prevState, error: { hasError: true, message: response?.message } }))
     if(response?.status === 200 && response?.validate) {
       setTransaction(prevState => {
+        if (prevState.step >= 3) {
+          setClose(3)
+          return {
+            step: 1,
+            error: { hasError: false, message: '' },
+            info: {
+              amount: data?.AscendingLine?.nivel1?.amount,
+              wallet: data?.AscendingLine?.nivel1?.address,
+              userId: data?.AscendingLine?.nivel1?.user,
+              wei: data?.AscendingLine?.nivel1?.wei,
+              status: data?.AscendingLine?.nivel1?.status
+            },
+            message: ''
+          }
+        }
         return {
           ...prevState,
           step: prevState.step + 1,
@@ -58,6 +74,7 @@ const ProgressPayment = (props) => {
           }
         }
       })
+
     }
   }, [response])
 
@@ -69,6 +86,19 @@ const ProgressPayment = (props) => {
         message: 'Por favor espere, esperando confirmacion.'
       }
     })
+    console.log('primera transaccion => ',{
+      step: transaction.step,
+      from: user.account,
+      to: transaction.info.wallet,
+      value: web3.utils.toWei(`${transaction.info.amount}`, 'ether'),
+      amount: transaction.info.amount
+    })
+    console.log('valores a enviar => ', {
+      nivel1: data?.AscendingLine.nivel1,
+      nivel2: data?.AscendingLine.nivel2,
+      nivel3: data?.AscendingLine.nivel3
+    })
+
     web3.eth.sendTransaction({
       from: user.account,
       to: transaction.info.wallet,

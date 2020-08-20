@@ -45,6 +45,7 @@ const ListOfBucket = (props) => {
             name={bucket.name}
             price={bucket.price}
             isLoading={isLoading}
+            isEnabled={bucket.isEnabled}
           />
         )
       })}
