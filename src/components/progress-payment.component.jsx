@@ -36,10 +36,20 @@ const ProgressPayment = (props) => {
   })
 
   useEffect(() => {
+    console.log('change data', data?.AscendingLine)
+    console.log('bucketId', bucketId)
+  }, [data, bucketId])
+
+  useEffect(() => {
+    console.log('compare variable close => ',close === 3)
+    console.log('!isLoading => ', !isLoading)
+    console.log('compare close && !isLoading => ', close ===3 && !isLoading)
     if (close === 3 && !isLoading) {
+      console.log('confirm comparation =>', 'refeching...')
       reload({ token: user?.token, isActive: true, account: user.account })
       refetch(true)
       onClose(prevState => !prevState)
+      setClose(1)
     }
   }, [close])
 
@@ -49,6 +59,7 @@ const ProgressPayment = (props) => {
       setTransaction(prevState => {
         if (prevState.step >= 3) {
           setClose(3)
+          console.log('step >= 3', 'setClose(3)')
           return {
             step: 1,
             error: { hasError: false, message: '' },
@@ -86,7 +97,7 @@ const ProgressPayment = (props) => {
         message: 'Por favor espere, esperando confirmacion.'
       }
     })
-    console.log('primera transaccion => ',{
+    console.log(`${transaction.step} transaccion => `,{
       step: transaction.step,
       from: user.account,
       to: transaction.info.wallet,
