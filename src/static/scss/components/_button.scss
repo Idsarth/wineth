@@ -22,4 +22,12 @@
       color: #fbfbfe;
     }
   }
+
+  &-disabled {
+    background-color: rgba(195,195,195,0.8);
+    cursor: inherit;
+    &:hover {
+      background-color: rgba(195,195,195,0.8);
+    }
+  }
 }

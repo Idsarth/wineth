@@ -5,8 +5,12 @@ import { FaEthereum } from 'react-icons/fa'
 import Button from './button.component'
 import Loader from './loader.component'
 
+// Import hooks
+import { useAuth } from '../hooks/useAuth'
+
 const Bucket = (props) => {
-  const { name, price, id, onClick, isLoading, bucketId } = props
+  const { user } = useAuth()
+  const { name, price, id, onClick, isLoading, bucketId, active, expire } = props
   return (
     <div className='bucket'>
       <div className='bucket-img'>
@@ -21,13 +25,20 @@ const Bucket = (props) => {
             <span className='bucket-price'>{price}</span>
           </span>
         </div>
-        {isLoading && id === bucketId ? (
-          <div className='bucket-loader'>
-            <Loader />
-          </div>
-        ) : (
-          <Button message='Activar' onClick={onClick} />
-        )}
+        {user?.token ? (
+          <>
+            {active && (
+              <div className={`bucket-expire ${expire <=5 ? 'bucket-warning' : ''}`}>
+                <span>Expira en {expire} dias</span>
+              </div>
+            )}
+            {isLoading && id === bucketId ? (
+              <div className='bucket-loader'>
+                <Loader />
+              </div>
+            ) : ( <Button disabled={active} message='Activar' onClick={onClick} /> )}
+          </>
+        ) : null}
       </div>
     </div>
   )

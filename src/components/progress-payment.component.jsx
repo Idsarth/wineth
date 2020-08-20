@@ -18,7 +18,7 @@ import { useFetch } from '../hooks/useAxios'
 const web3 = new Web3(Web3.givenProvider)
 const ProgressPayment = (props) => {
   const { user, reload } = useAuth()
-  const { isFetching, data, bucketId, onClose } = props
+  const { isFetching, data, bucketId, onClose, refetch } = props
   const [isReady, setIsReady] = useState(false)
   const [{ isFetching: isLoading, data: response }, execute] = useFetch({ url: '/transaction/validate', method: 'POST' }, false)
   const [transaction, setTransaction] = useState({
@@ -37,12 +37,12 @@ const ProgressPayment = (props) => {
   useEffect(() => {
     if (transaction.step === 4 && !isLoading) {
       reload({ token: user?.token, isActive: true, account: user.account })
+      refetch(true)
       onClose(prevState => !prevState)
     }
   }, [transaction.step])
 
   useEffect(() => {
-    console.log(response)
     if(response?.status === 400) setTransaction(prevState => ({ ...prevState, error: { hasError: true, message: response?.message } }))
     if(response?.status === 200 && response?.validate) {
       setTransaction(prevState => {
@@ -62,11 +62,6 @@ const ProgressPayment = (props) => {
   }, [response])
 
   const handlePayment = () => {
-    console.log('',{
-      from: user.account,
-      to: transaction.info.wallet,
-      value: web3.utils.toWei(`${transaction.info.amount}`, 'ether')
-    })
     setIsReady(true)
     setTransaction(prevState => {
       return {
@@ -80,15 +75,7 @@ const ProgressPayment = (props) => {
       value: web3.utils.toWei(`${transaction.info.amount}`, 'ether')
     })
       .then(hash => {
-        console.log(hash)
         execute({
-          hash: hash.transactionHash,
-          amount: transaction.info.amount,
-          walletReceived: transaction.info.wallet,
-          bucketId,
-          receiveId: transaction.info.userId
-        })
-        console.log('send transaction to api => ',{
           hash: hash.transactionHash,
           amount: transaction.info.amount,
           walletReceived: transaction.info.wallet,
@@ -103,7 +90,6 @@ const ProgressPayment = (props) => {
         })
       })
       .catch((error) => setTransaction(prevState => {
-        console.log(error)
         return {
           ...prevState,
           error: {

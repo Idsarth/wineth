@@ -22,28 +22,28 @@ const PartnersPage = () => {
       nodes.push({ id: counter, pid: 1, wallet: level.sponsors.referers.referer.wallet })
     })
 
-    data.treeView.level2.slice(0,2).map((level, index) => {
+    data.treeView.level2.slice(0,2).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 2, wallet: level.sponsors.referers.referer.wallet })
     })
-    data.treeView.level2.slice(2,4).map((level, index) => {
+    data.treeView.level2.slice(2,4).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 3, wallet: level.sponsors.referers.referer.wallet })
     })
 
-    data.treeView.level3.slice(0,2).map((level, index) => {
+    data.treeView.level3.slice(0,2).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 4, wallet: level.sponsors.referers.referer.wallet })
     })
-    data.treeView.level3.slice(2,4).map((level, index) => {
+    data.treeView.level3.slice(2,4).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 5, wallet: level.sponsors.referers.referer.wallet })
     })
-    data.treeView.level3.slice(4,6).map((level, index) => {
+    data.treeView.level3.slice(4,6).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 6, wallet: level.sponsors.referers.referer.wallet })
     })
-    data.treeView.level3.slice(6,8).map((level, index) => {
+    data.treeView.level3.slice(6,8).map((level) => {
       ++counter
       nodes.push({ id: counter, pid: 7, wallet: level.sponsors.referers.referer.wallet })
     })
@@ -51,9 +51,7 @@ const PartnersPage = () => {
   }
 
   return (
-    <Chart
-      nodes={data?.status === 400 ? [] : loadNodes()}
-    />
+    <Chart nodes={data?.status === 400 ? [] : loadNodes()} />
   )
 }
 

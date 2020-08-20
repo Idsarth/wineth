@@ -18,6 +18,18 @@
     width: 100%;
   }
 
+  &-expire {
+    display: flex;
+    justify-content: center;
+    span {
+      font-size: 18px;
+    }
+  }
+
+  &-warning {
+    color: #c40505;
+  }
+
   &-details {
     display: flex;
     justify-content: space-between;

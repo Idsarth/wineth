@@ -70,7 +70,7 @@ const SignInPage = () => {
         <input
           className='input bottom'
           placeholder='System ID'
-          onChange={setSystemId}
+          onChange={value => setSystemId(value.target.value)}
         />
         {error.hasError && <Error className='bottom' message={error.message}/>}
         {isFetching || isLoading ? ( <Loader/> ) : (

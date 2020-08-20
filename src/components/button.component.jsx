@@ -1,12 +1,13 @@
 import React from 'react'
 
 const Button = (props) => {
-  const { message, onClick, variant } = props
+  const { message, onClick, variant, disabled } = props
   return (
     <input
+      disabled={disabled}
       type='button'
       value={message}
-      className={`button ${variant ? 'button-outline' : ''}`}
+      className={`button ${disabled ? 'button-disabled' : ''} ${variant ? 'button-outline' : ''}`}
       onClick={onClick}
     />
   )

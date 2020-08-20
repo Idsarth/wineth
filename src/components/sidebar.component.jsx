@@ -37,7 +37,7 @@ const SideBar = () => {
               message={opt.message}
               routeName={
                 opt.routeName === '/partners'
-                  ? `${opt.routeName}/${decode(user.token).id}`
+                  ? `${opt.routeName}/${user?.token ? decode(user.token).id : user.id }`
                   : opt.routeName
               }
               icon={opt.icon}

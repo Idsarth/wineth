@@ -1,7 +1,5 @@
 import React, {useEffect, useState, useMemo} from 'react'
-
-// Import context
-// import { useAuth } from '../hooks/useAuth'
+import { decode } from 'jsonwebtoken'
 
 // Import components
 import ListOfStatistics from '../components/list/list-of-statistics'
@@ -13,9 +11,12 @@ import Particle from '../components/particle.component'
 
 // Import hooks
 import { useFetch } from '../hooks/useAxios'
+import { useAuth } from '../hooks/useAuth'
 
 const HomePage = () => {
+  const { user } = useAuth()
   const [show, setShow]  = useState(false)
+  const [refetch, setRefetch] = useState(false)
   const [bucketId, setBucketId] = useState()
   const [{ data, isFetching }, execute] = useFetch({ method: 'GET', url: `/matrix/sponsors/${bucketId}` }, false)
 
@@ -28,15 +29,17 @@ const HomePage = () => {
     if (bucketId) execute()
   }, [bucketId])
 
+  const handleRefetch = (refetch) => setRefetch(refetch)
   const ListBucket = useMemo(() => {
     return (
       <Modal
         onClosed={() => setShow(prevState => !prevState)}
         className={show ? 'active' : ''}>
-        <ProgressPayment onClose={setShow} isFetching={isFetching} data={data} bucketId={bucketId} />
+        <ProgressPayment refetch={handleRefetch} onClose={setShow} isFetching={isFetching} data={data} bucketId={bucketId} />
       </Modal>
     )
   }, [show, isFetching, data, bucketId])
+
 
   return (
     <div>
@@ -44,7 +47,7 @@ const HomePage = () => {
         <ListOfStatistics />
       </div>
       <main className='l-main'>
-        <ListOfBucket onModal={handleShow} />
+        <ListOfBucket refetch={refetch}  id={user?.token ? decode(user.token).id : user?.id} onModal={handleShow} />
       </main>
 
       <Particle
@@ -101,7 +104,6 @@ const HomePage = () => {
         }}
       />
       {data?.AscendingLine && ListBucket}
-      {/*{ListBucket}*/}
     </div>
   )
 }
