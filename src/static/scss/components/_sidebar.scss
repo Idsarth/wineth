@@ -2,16 +2,35 @@
   position: fixed;
   top: 3.6rem;
   left: 0;
+  z-index: 999999;
   width: 15%;
   height: 100%;
   grid-area: sidebar;
   background-color: #060818;
   border-right: 1px solid #0e1726;
 
+  @include from(xl) {
+    width: 30%;
+  }
+
+  @include from(m) {
+    transition: transform .3s ease-in-out;
+    transform: translateX(-100%);
+    width: 50%;
+  }
+  @include from(s) {
+    width: 80%;
+  }
+
   &-list {
     padding: 1rem;
   }
   &-item {
     padding: 10px 20px;
+  }
+
+  &-show {
+    transition: transform .3s ease-in-out;
+    transform: translateX(0);
   }
 }

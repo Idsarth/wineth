@@ -5,6 +5,15 @@
   grid-template-columns: 15% 85%;
   grid-template-rows: 3.6rem 1fr;
 
+  @include from(xl) {
+    grid-template-columns: 30% 70%;
+  }
+
+  @include from(m) {
+    grid-template-areas: "nav" "content" "content";
+    grid-template-columns: 100%;
+  }
+
   &-content {
     grid-area: content;
     padding: 2rem 2rem 0 2rem;

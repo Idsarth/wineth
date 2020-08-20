@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { IoIosHome } from 'react-icons/io'
 import { MdAccountBalance } from 'react-icons/md'
 import { decode } from 'jsonwebtoken'
@@ -25,15 +25,16 @@ const options = [
   },
 ]
 
-const SideBar = () => {
+const SideBar = (props) => {
   const { user } = useAuth()
 
   return (
-    <aside className='sidebar'>
+    <aside className={`sidebar ${props.active ? 'sidebar-show' : ''}`}>
       <ul className='sidebar-list'>
         {options.map(opt => (
           <li key={opt.id}>
             <ListTile
+              onClick={() => props.onSize(!props.active)}
               message={opt.message}
               routeName={
                 opt.routeName === '/partners'

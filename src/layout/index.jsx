@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
 
 // Import components
@@ -12,11 +12,14 @@ import { useAuth } from '../hooks/useAuth'
 export const Layout = (props) => {
   const { children } = props
   const { isLoggedIn } = useAuth()
+  const [showSidebar, setShowSidebar] = useState(false)
+
+  const handleShowSidebar = (value) => setShowSidebar(value)
   if (!isLoggedIn) return <Redirect to='/sign-in' />
   return (
     <div className='layout'>
-      <Navbar />
-      <SideBar />
+      <Navbar onSize={handleShowSidebar} size={showSidebar} />
+      <SideBar active={showSidebar} onSize={handleShowSidebar} />
       <section className='layout-content'>
         {children}
         <Footer />

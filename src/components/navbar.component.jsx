@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { IoIosMenu } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { decode } from 'jsonwebtoken'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -12,14 +13,18 @@ import DropDown from './dropdown.component'
 // Import hooks
 import { useAuth } from '../hooks/useAuth'
 
-const Navbar = () => {
-  const [copy, setCopy] = useState(false)
+const Navbar = (props) => {
   const { user } = useAuth()
+  const [_, setCopy] = useState(false)
+
   return (
     <header className='navbar'>
       <nav className='nav'>
         <div className='nav-left'>
           <div>
+            <div onClick={() => props.onSize(!props.size)}>
+              <IoIosMenu className='nav-menu' />
+            </div>
             <ol className='nav-breadcrumb'>
               <li>
                 <Link to='/'>Dashboard</Link>

@@ -18,7 +18,10 @@ const DropDown = () => {
       <div onClick={toggle} className='dropdown-user'>
         <div>
           {user?.account ? (
-            <p>{user?.account}</p>
+            <>
+              <p>{user?.account}</p>
+              <FaEthereum className='dropdown-icon dropdown-disabled' />
+            </>
           ) : ( <FaEthereum className='dropdown-icon' /> )}
           <IoMdArrowDropdown className='dropdown-icon' />
         </div>

@@ -6,6 +6,12 @@
     height: 20px;
     color: #e0e6ed;
   }
+  &-disabled {
+    display: none;
+    @include from(xl) {
+      display: inline-block;
+    }
+  }
   &-user {
     display: flex;
     cursor: pointer;
@@ -16,6 +22,10 @@
       p {
         margin-right: 5px;
         color: #e0e6ed;
+
+        @include from(xl) {
+          display: none;
+        }
       }
     }
     img {
