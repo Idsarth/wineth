@@ -32,7 +32,7 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
     } finally {
       setIsFetching(false)
     }
-  }, [url, body, method])
+  }, [url, body, method, user])
 
   useEffect(() => {
     if (immediate || reFetch) execute()

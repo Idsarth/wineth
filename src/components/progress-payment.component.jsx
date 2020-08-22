@@ -44,6 +44,7 @@ const ProgressPayment = (props) => {
     console.log('compare variable close => ',close === 3)
     console.log('!isLoading => ', !isLoading)
     console.log('compare close && !isLoading => ', close ===3 && !isLoading)
+    console.log('close, !isLoading => ', {close, isLoading})
     if (close === 3 && !isLoading) {
       console.log('confirm comparation =>', 'refeching...')
       reload({ token: user?.token, isActive: true, account: user.account })
@@ -131,6 +132,7 @@ const ProgressPayment = (props) => {
         })
       })
       .catch((error) => setTransaction(prevState => {
+        console.log(error)
         return {
           ...prevState,
           error: {

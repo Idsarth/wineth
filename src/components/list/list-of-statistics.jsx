@@ -11,8 +11,9 @@ import CardShimmer from '../shimmer/card.shimmer'
 import { useFetch } from '../../hooks/useAxios'
 import { useAuth } from '../../hooks/useAuth'
 
-const ListOfStatistics = () => {
+const ListOfStatistics = (props) => {
   const { user } = useAuth()
+  const { refetch } = props
   const [{ isFetching, data, error }, execute] = useFetch({ url: '/user/profits', method: 'GET' }, false)
   const [{ isFetching: isLoading, data: response }, load] = useFetch({ url: `/user/profits/${user?.id}`, method: 'GET' }, false)
 
@@ -20,6 +21,10 @@ const ListOfStatistics = () => {
     if (user?.id) load()
     else execute()
   }, [])
+
+  useEffect(() => {
+    if (refetch) execute()
+  }, [refetch])
 
   if(isFetching || isLoading) return <CardShimmer />
   if(error) return null
@@ -42,8 +47,8 @@ const ListOfStatistics = () => {
       />
       <Card
         logo={<FaLevelUpAlt className='home-icon' />}
-        title='Nivel Actual'
-        total={5}
+        title='Ultimo Bucket'
+        total={response?.lastBucket ? response.lastBucket ? response.lastBucket : 0 : data?.lastBucket ? data.lastBucket : 0}
       />
     </>
   )

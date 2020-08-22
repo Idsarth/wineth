@@ -15,11 +15,11 @@ const ListOfBucket = (props) => {
 
   useEffect(() => {
     if (response?.status) props.onModal(true, bucketId)
-  }, [response])
+  }, [response, bucketId])
 
   useEffect(() => {
     if (refetch) reload()
-  }, [refetch])
+  }, [refetch, reload])
 
   const handleShowModal = async (id) => {
     setBucketId(id)

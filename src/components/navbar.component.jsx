@@ -15,7 +15,7 @@ import { useAuth } from '../hooks/useAuth'
 
 const Navbar = (props) => {
   const { user } = useAuth()
-  const [_, setCopy] = useState(false)
+  const [setCopy] = useState(false)
 
   return (
     <header className='navbar'>

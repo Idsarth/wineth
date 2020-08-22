@@ -21,17 +21,17 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('@storage')
     localStorage.setItem('@storage', JSON.stringify(data))
     setUser(data)
-  }, [user])
+  }, [])
 
   const signIn = useCallback((user) => {
     localStorage.setItem('@storage', JSON.stringify(user))
     setUser(user)
-  }, [user])
+  }, [])
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@storage')
     setUser(null)
-  }, [user])
+  }, [])
 
   if (loading) return <p>loading....</p>
   return <AuthContext.Provider value={{ user, signIn, signOut, isLoggedIn: !!user, reload }} children={children} />

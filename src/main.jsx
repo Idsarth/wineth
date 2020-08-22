@@ -12,6 +12,7 @@ import HomePage from './pages/home.page'
 import SignInPage from './pages/signin.page'
 import SignUpPage from './pages/signup.page'
 import PartnersPage from './pages/partners.page'
+import ProfitPage from './pages/profit.page'
 import NotFoundPage from './pages/not-found.page'
 
 const Main = () => {
@@ -23,6 +24,7 @@ const Main = () => {
         <Layout>
           <Private exact path='/' component={HomePage} />
           <Private exact path='/partners/:id' component={PartnersPage} />
+          <Private exact path='/profits/:id' component={ProfitPage} />
         </Layout>
         <Route path='*' component={NotFoundPage} />
       </Switch>

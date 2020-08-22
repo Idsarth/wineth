@@ -44,7 +44,7 @@ const HomePage = () => {
   return (
     <div>
       <div className="home-statistics">
-        <ListOfStatistics />
+        <ListOfStatistics refetch={refetch} />
       </div>
       <main className='l-main'>
         <ListOfBucket refetch={refetch}  id={user?.token ? decode(user.token).id : user?.id} onModal={handleShow} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 // Import components
@@ -6,6 +6,7 @@ import Chart from '../components/chart.component'
 
 // Import hooks
 import { useFetch } from '../hooks/useAxios'
+import Particle from "../components/particle.component";
 
 const PartnersPage = () => {
   const { id } = useParams()
@@ -51,7 +52,62 @@ const PartnersPage = () => {
   }
 
   return (
-    <Chart nodes={data?.status === 400 ? [] : loadNodes()} />
+    <div>
+      <Chart nodes={data?.status === 400 ? [] : loadNodes()} />
+      <Particle
+        params={{
+          "particles": {
+            "number": {
+              "value": 160,
+              "density": {
+                "enable": false
+              }
+            },
+            "size": {
+              "value": 3,
+              "random": true,
+              "anim": {
+                "speed": 4,
+                "size_min": 0.3
+              }
+            },
+            "line_linked": {
+              "enable": false
+            },
+            "move": {
+              "random": true,
+              "speed": 1,
+              "direction": "top",
+              "out_mode": "out"
+            }
+          },
+          "interactivity": {
+            "events": {
+              "onhover": {
+                "enable": true,
+                "mode": "bubble"
+              },
+              "onclick": {
+                "enable": true,
+                "mode": "repulse"
+              }
+            },
+            "modes": {
+              "bubble": {
+                "distance": 250,
+                "duration": 2,
+                "size": 0,
+                "opacity": 0
+              },
+              "repulse": {
+                "distance": 400,
+                "duration": 4
+              }
+            }
+          }
+        }}
+      />
+    </div>
   )
 }
 
