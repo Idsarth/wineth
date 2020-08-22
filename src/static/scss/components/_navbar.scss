@@ -37,8 +37,10 @@
       height: 25px;
       cursor: pointer;
       margin-right: 1rem;
-
-
+      display: none;
+      @include from(m) {
+        display: inline-block;
+      }
     }
 
     &-breadcrumb {

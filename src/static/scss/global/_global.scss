@@ -19,6 +19,15 @@
 
   &-message {
     color: #fbfbfe;
+    text-align: center;
+  }
+  @include from(s) {
+    width: 100%;
+    padding: 2rem 1rem;
+    &-img {
+      width: 8rem;
+      margin-bottom: 2rem;
+    }
   }
 }
 
@@ -43,9 +52,6 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  .particles {
-
-  }
 }
 
 .bottom {

@@ -19,7 +19,7 @@ const ListOfBucket = (props) => {
 
   useEffect(() => {
     if (refetch) reload()
-  }, [refetch, reload])
+  }, [refetch])
 
   const handleShowModal = async (id) => {
     setBucketId(id)

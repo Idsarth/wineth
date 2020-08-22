@@ -16,8 +16,8 @@ import { useAuth } from '../hooks/useAuth'
 import {useFetch} from "../hooks/useAxios";
 
 const SignUpPage = () => {
-  const { signIn, isLoggedIn } = useAuth()
   const { id } = useParams()
+  const { signIn, isLoggedIn } = useAuth()
   const [accounts, setAccounts] = useState('')
   const [{ error: errorNetwork, isFetching, data }, execute] = useFetch({
     url: '/auth/signup',
@@ -67,9 +67,7 @@ const SignUpPage = () => {
         />
         {error.hasError && <Error className='bottom' message={error.message} />}
         <span className='form-message'>Inicia sesion con metamask para continuar.</span>
-        {isFetching ? (
-          <Loader />
-        ) : (
+        {isFetching ? ( <Loader /> ) : (
           <Button
             variant
             message='Login con Metamask'
