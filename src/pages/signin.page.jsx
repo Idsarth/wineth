@@ -54,6 +54,7 @@ const SignInPage = () => {
         }
       })
       .catch((error) => {
+        alert(`error ${error.toString()}`)
         setError({ hasError: true, message: error.toString() })
       })
     // if(window.ethereum) {
