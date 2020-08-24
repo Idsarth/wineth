@@ -12,7 +12,7 @@ import { useFetch } from '../hooks/useAxios'
 
 // Import components
 import Loader from '../components/loader.component'
-import Particle from "../components/particle.component";
+import Particle from '../components/particle.component'
 
 const useStyles = makeStyles({
   table: {

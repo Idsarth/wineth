@@ -8,13 +8,15 @@ const Chart = (props) => {
       new OrgChart(
         _chart.current,
         {
-          template: 'olivia',
+          // template: 'olivia',
+          template: 'polina',
           enableSearch: false,
-          nodeMouseClick: OrgChart.action.none,
+          // nodeMouseClick: OrgChart.action.none,
           nodes: props.nodes,
           nodeBinding: {
             field_0:  "id",
-            field_1: "wallet",
+            field_1: "userId",
+            field_2: "wallet",
           },
           tags: {
             "subLevels0": {
