@@ -3,6 +3,9 @@ import Ethereum from '@metamask/detect-provider'
 import { Redirect } from 'react-router-dom'
 import Web3 from 'web3'
 
+// Import layout
+import SeoLayout from '../layout/seo.layout'
+
 // Import logo
 import logo from '../static/img/logo.png'
 
@@ -40,9 +43,15 @@ const SignInPage = () => {
   }, [])
 
   useEffect(() => {
+    alert(`error => ${errorNetwork.toString()}`)
+    alert(`data => ${data?.status} ${data?.message} ${JSON.stringify(data)}`)
+  }, [errorNetwork, data])
+
+  useEffect(() => {
     if(errorNetwork) alert(`error network ${errorNetwork.toString()}`)
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
-    if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts, isActive: data.isActiveBucket })
+    if (data?.status === 400) setError({ hasError: true, message: data.message })
+    if (data?.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts, isActive: data.isActiveBucket })
   }, [errorNetwork, data])
 
   const onSubmit = () => {
@@ -59,17 +68,6 @@ const SignInPage = () => {
         alert(`error ${error.toString()}`)
         setError({ hasError: true, message: error.toString() })
       })
-    // if(window.ethereum) {
-    //   window.ethereum
-    //     .request({method: 'eth_requestAccounts'})
-    //     .then((accounts) => {
-    //       if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
-    //       if (accounts[0] !== null) {
-    //         setAccounts(accounts[0])
-    //         execute({ wallet: accounts[0] })
-    //       }
-    //     })
-    // }
   }
 
   const onSubmitSystemId = () => {
@@ -80,49 +78,52 @@ const SignInPage = () => {
   if (isLoggedIn) return <Redirect to='/'/>
 
   return (
-    <div className='l-form'>
-      <form className='form'>
-        <div className='form-img'>
-          <img src={logo} alt='Logo Wineth'/>
-        </div>
-        <input
-          className='input bottom'
-          placeholder='System ID'
-          onChange={value => setSystemId(value.target.value)}
-        />
-        {error.hasError && <Error className='bottom' message={error.message}/>}
-        {isFetching || isLoading ? ( <Loader/> ) : (
-          <>
-            {isMobile ? (
-              <Button variant message='Login con Metamask/TrustWallet' onClick={onSubmit} />
-            ) : <Button variant message='Login con Metamask' onClick={onSubmit} /> }
-            <Button onClick={onSubmitSystemId} message='Ingresar' />
-          </>
-        )}
-      </form>
-      {!isMobile && (
-        <Particle
-        params={{
-          "particles": {
-            "number": {
-              "value": 50
+    <>
+      <SeoLayout title='Wineth - Sign In' />
+      <div className='l-form'>
+        <form className='form'>
+          <div className='form-img'>
+            <img src={logo} alt='Logo Wineth'/>
+          </div>
+          <input
+            className='input bottom'
+            placeholder='System ID'
+            onChange={value => setSystemId(value.target.value)}
+          />
+          {error.hasError && <Error className='bottom' message={error.message}/>}
+          {isFetching || isLoading ? ( <Loader/> ) : (
+            <>
+              {isMobile ? (
+                <Button variant message='Login con Metamask/TrustWallet' onClick={onSubmit} />
+              ) : <Button variant message='Login con Metamask' onClick={onSubmit} /> }
+              <Button onClick={onSubmitSystemId} message='Ingresar' />
+            </>
+          )}
+        </form>
+        {!isMobile && (
+          <Particle
+          params={{
+            "particles": {
+              "number": {
+                "value": 50
+              },
+              "size": {
+                "value": 3
+              }
             },
-            "size": {
-              "value": 3
-            }
-          },
-          "interactivity": {
-            "events": {
-              "onhover": {
-                "enable": true,
-                "mode": "repulse"
+            "interactivity": {
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "repulse"
+                }
               }
             }
-          }
-        }}
-      />
-      )}
-    </div>
+          }}
+        />
+        )}
+      </div>
+    </>
   )
 }
 
