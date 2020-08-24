@@ -54,7 +54,7 @@ const PartnersPage = () => {
 
   return (
     <div>
-      {data?.status === 400 || data?.treeView.level1.length >= 0 ? (
+      {data?.status === 400 || data?.treeView.level1.length === 0 ? (
         <p>No data</p>
       ) : (
         <Chart nodes={loadNodes()} />

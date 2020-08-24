@@ -46,13 +46,17 @@ const ProfitPage = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.getProfits.map(profit => (
+            {data?.getProfits.length !== 0 ? data?.getProfits.map(profit => (
               <TableRow key={profit.id}>
                 <TableCell className={classes.tableCell}>{profit.user.id}</TableCell>
                 <TableCell align='center' className={classes.tableCell}>{profit.user.addressWallet}</TableCell>
                 <TableCell align='right' className={classes.amount}>+{profit.amount}</TableCell>
               </TableRow>
-            ))}
+            )) : (
+              <TableRow>
+                <TableCell colSpan={3} className={classes.amount} align='center'>No hay data que mostrar</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
