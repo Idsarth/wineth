@@ -18,7 +18,7 @@ const PartnersPage = () => {
 
   const loadNodes = () => {
     let counter = 1
-    const nodes = [{ id: counter, wallet: user?.account }]
+    const nodes = [{ id: counter, wallet: user?.account, userId: id }]
     data.treeView.level1.map(level => {
       ++counter
       nodes.push({ id: counter, pid: 1, wallet: level.sponsors.referers.referer.wallet, userId: level.sponsors.referers.referer.id })

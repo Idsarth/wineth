@@ -16,7 +16,6 @@ const Chart = (props) => {
           nodeBinding: {
             field_0:  "userId",
             field_1: "wallet",
-            // field_2: "wallet",
           },
           tags: {
             "subLevels0": {
