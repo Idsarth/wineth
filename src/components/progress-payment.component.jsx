@@ -36,17 +36,7 @@ const ProgressPayment = (props) => {
   })
 
   useEffect(() => {
-    console.log('change data', data?.AscendingLine)
-    console.log('bucketId', bucketId)
-  }, [data, bucketId])
-
-  useEffect(() => {
-    console.log('compare variable close => ',close === 3)
-    console.log('!isLoading => ', !isLoading)
-    console.log('compare close && !isLoading => ', close ===3 && !isLoading)
-    console.log('close, !isLoading => ', {close, isLoading})
     if (close === 3 && !isLoading) {
-      console.log('confirm comparation =>', 'refeching...')
       reload({ token: user?.token, isActive: true, account: user.account })
       refetch(true)
       onClose(prevState => !prevState)
@@ -60,7 +50,6 @@ const ProgressPayment = (props) => {
       setTransaction(prevState => {
         if (prevState.step >= 3) {
           setClose(3)
-          console.log('step >= 3', 'setClose(3)')
           return {
             step: 1,
             error: { hasError: false, message: '' },
@@ -98,19 +87,6 @@ const ProgressPayment = (props) => {
         message: 'Por favor espere, esperando confirmacion.'
       }
     })
-    console.log(`${transaction.step} transaccion => `,{
-      step: transaction.step,
-      from: user.account,
-      to: transaction.info.wallet,
-      value: web3.utils.toWei(`${transaction.info.amount}`, 'ether'),
-      amount: transaction.info.amount
-    })
-    console.log('valores a enviar => ', {
-      nivel1: data?.AscendingLine.nivel1,
-      nivel2: data?.AscendingLine.nivel2,
-      nivel3: data?.AscendingLine.nivel3
-    })
-
     web3.eth.sendTransaction({
       from: user.account,
       to: transaction.info.wallet,
@@ -132,7 +108,6 @@ const ProgressPayment = (props) => {
         })
       })
       .catch((error) => setTransaction(prevState => {
-        console.log(error)
         return {
           ...prevState,
           error: {

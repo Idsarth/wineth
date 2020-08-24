@@ -52,7 +52,6 @@ const SignInPage = () => {
       .then(accounts => {
         if(accounts[0] !== null) {
           setAccounts(accounts[0])
-          alert(`wallet || ${accounts} - ${accounts[0]}`)
           execute({ wallet: accounts[0] })
         }
       })

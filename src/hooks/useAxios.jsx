@@ -16,8 +16,9 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
   const execute = useCallback(async (data) => {
     try {
       const headers = new Headers()
+      headers.append('Accept', 'application/json')
       headers.append('Content-Type', 'application/json')
-      headers.append('Authorization', `${user?.token}`)
+      user?.token && headers.append('Authorization', `${user?.token}`)
       setIsFetching(true)
       const response = await fetch(`${Env.SERVER_ADDRESS}${url}`,
         {
