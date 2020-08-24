@@ -47,17 +47,14 @@ const SignInPage = () => {
   }, [errorNetwork, data])
 
   const onSubmit = () => {
-    const web3 = new Web3(Web3.givenProvider)
-    web3.eth.requestAccounts()
-      .then(accounts => {
-        if(accounts[0] !== null) {
+    window.ethereum
+      .request({method: 'eth_requestAccounts'})
+      .then((accounts) => {
+        if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
+        if (accounts[0] !== null) {
           setAccounts(accounts[0])
-          alert(`wallet || ${accounts} - ${accounts[0]}`)
           execute({ wallet: accounts[0] })
         }
-      })
-      .catch((error) => {
-        setError({ hasError: true, message: error.toString() })
       })
   }
 
