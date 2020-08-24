@@ -35,6 +35,7 @@ const SignUpPage = () => {
   }, [])
 
   useEffect(() => {
+    if(errorNetwork) alert(`error network ${errorNetwork.toString()}`)
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
     if (data.status === 400) setError({ hasError: true, message: data.message })
     if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts })

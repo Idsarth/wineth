@@ -40,6 +40,7 @@ const SignInPage = () => {
   }, [])
 
   useEffect(() => {
+    if(errorNetwork) alert(`error network ${errorNetwork.toString()}`)
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
     if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts, isActive: data.isActiveBucket })
   }, [errorNetwork, data])
