@@ -19,11 +19,20 @@
     padding-left: 15px;
     padding-right: 15px;
 
+    @include from(400px) {
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+    }
+
     &-left {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0 1rem;
+
+      @include from(400px) {
+        padding: 0 1rem 0 0;
+      }
       div {
         display: flex;
         align-items: center;

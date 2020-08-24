@@ -14,6 +14,7 @@ import Loader from '../components/loader.component'
 // Import hooks
 import { useAuth } from '../hooks/useAuth'
 import {useFetch} from "../hooks/useAxios";
+import Web3 from 'web3'
 
 const SignUpPage = () => {
   const { id } = useParams()
@@ -29,7 +30,6 @@ const SignUpPage = () => {
     const detectProvider = async () => {
       const provider = await Ethereum()
       if (!provider) return setError({ hasError: true, message: 'Please install MetaMask!' })
-      window.ethereum.on('chainChanged', (_chainId) => window.location.reload())
     }
     detectProvider()
   }, [])
@@ -41,15 +41,28 @@ const SignUpPage = () => {
   }, [errorNetwork, data])
 
   const onSubmit = () => {
-    window.ethereum
-      .request({method: 'eth_requestAccounts'})
-      .then((accounts) => {
-        if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
-        if (accounts[0] !== null) {
+    const web3 = new Web3(Web3.givenProvider)
+    web3.eth.requestAccounts()
+      .then(accounts => {
+        if(accounts[0] !== null) {
           setAccounts(accounts[0])
           execute({ wallet: accounts[0], sponsorId: id ? id : 1 })
         }
       })
+      .catch((error) => {
+        setError({ hasError: true, message: error.toString() })
+      })
+    // if(window.ethereum) {
+    //   window.ethereum
+    //   .request({method: 'eth_requestAccounts'})
+    //   .then((accounts) => {
+    //     if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
+    //     if (accounts[0] !== null) {
+    //       setAccounts(accounts[0])
+    //       execute({ wallet: accounts[0], sponsorId: id ? id : 1 })
+    //     }
+    //   })
+    // }
   }
 
   if (isLoggedIn) return <Redirect to='/' />
@@ -70,7 +83,7 @@ const SignUpPage = () => {
         {isFetching ? ( <Loader /> ) : (
           <Button
             variant
-            message='Login con Metamask'
+            message='Registro con Metamask/TrustWallet'
             onClick={onSubmit}
           />
         )}

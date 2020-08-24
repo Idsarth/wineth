@@ -1,3 +1,3 @@
 export const Env = {
-  SERVER_ADDRESS: 'https://wineth.live/api/'
+  SERVER_ADDRESS: 'https://wineth.live/api'
 }

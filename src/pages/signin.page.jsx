@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import Ethereum from '@metamask/detect-provider'
 import { Redirect } from 'react-router-dom'
+import Web3 from 'web3'
 
 // Import logo
 import logo from '../static/img/logo.png'
@@ -8,6 +9,7 @@ import logo from '../static/img/logo.png'
 // Import hooks
 import { useAuth } from '../hooks/useAuth'
 import { useFetch } from '../hooks/useAxios'
+import { useBrowser } from '../hooks/useBrowser'
 
 // Import components
 import Button from '../components/button.component'
@@ -17,6 +19,7 @@ import Loader from '../components/loader.component'
 
 const SignInPage = () => {
   const { signIn, isLoggedIn } = useAuth()
+  const { isMobile } = useBrowser()
   const [systemId, setSystemId] = useState('')
   const [accounts, setAccounts] = useState('')
   const [{ error: errorNetwork, isFetching, data }, execute] = useFetch({ url: '/auth/signin', method: 'POST' }, false)
@@ -32,7 +35,6 @@ const SignInPage = () => {
     const detectProvider = async () => {
       const provider = await Ethereum()
       if (!provider) return setError({ hasError: true, message: 'Please install MetaMask!' })
-      window.ethereum.on('chainChanged', (_chainId) => window.location.reload())
   }
     detectProvider()
   }, [])
@@ -43,15 +45,28 @@ const SignInPage = () => {
   }, [errorNetwork, data])
 
   const onSubmit = () => {
-    window.ethereum
-      .request({method: 'eth_requestAccounts'})
-      .then((accounts) => {
-        if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
-        if (accounts[0] !== null) {
+    const web3 = new Web3(Web3.givenProvider)
+    web3.eth.requestAccounts()
+      .then(accounts => {
+        if(accounts[0] !== null) {
           setAccounts(accounts[0])
           execute({ wallet: accounts[0] })
         }
       })
+      .catch((error) => {
+        setError({ hasError: true, message: error.toString() })
+      })
+    // if(window.ethereum) {
+    //   window.ethereum
+    //     .request({method: 'eth_requestAccounts'})
+    //     .then((accounts) => {
+    //       if (accounts.length === 0) setError({hasError: true, message: 'Please connect to Metamask.'})
+    //       if (accounts[0] !== null) {
+    //         setAccounts(accounts[0])
+    //         execute({ wallet: accounts[0] })
+    //       }
+    //     })
+    // }
   }
 
   const onSubmitSystemId = () => {
@@ -75,12 +90,15 @@ const SignInPage = () => {
         {error.hasError && <Error className='bottom' message={error.message}/>}
         {isFetching || isLoading ? ( <Loader/> ) : (
           <>
-            <Button variant message='Login con Metamask' onClick={onSubmit} />
+            {isMobile ? (
+              <Button variant message='Login con Metamask/TrustWallet' onClick={onSubmit} />
+            ) : <Button variant message='Login con Metamask' onClick={onSubmit} /> }
             <Button onClick={onSubmitSystemId} message='Ingresar' />
           </>
         )}
       </form>
-      <Particle
+      {!isMobile && (
+        <Particle
         params={{
           "particles": {
             "number": {
@@ -100,6 +118,7 @@ const SignInPage = () => {
           }
         }}
       />
+      )}
     </div>
   )
 }

@@ -17,6 +17,10 @@
   &-content {
     grid-area: content;
     padding: 2rem 2rem 0 2rem;
+
+    @include from(400px) {
+      padding: 2rem 0.8rem 0 0.8rem;
+    }
   }
 }
 

@@ -17,7 +17,7 @@ export const useFetch = ({ url, body, method }, immediate = true) => {
     try {
       const headers = new Headers()
       headers.append('Content-Type', 'application/json')
-      headers.append('auth-token', `${user?.token}`)
+      headers.append('Authorization', `${user?.token}`)
       setIsFetching(true)
       const response = await fetch(`${Env.SERVER_ADDRESS}${url}`,
         {

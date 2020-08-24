@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Import routes
@@ -16,6 +16,21 @@ import ProfitPage from './pages/profit.page'
 import NotFoundPage from './pages/not-found.page'
 
 const Main = () => {
+
+  useEffect(() => {
+    const headers = new Headers()
+    headers.append('Accept' ,'application/json')
+    headers.append('Content-Type' ,'application/json')
+
+    fetch('http://restauranteanonuevochino.com/admin/login', {
+      body: JSON.stringify({ email: "root@admin.com", password: '12345678' }),
+      method: 'POST',
+      headers
+    })
+      .then(console.log)
+      .catch(console.log)
+  }, [])
+
   return (
     <Router>
       <Switch>

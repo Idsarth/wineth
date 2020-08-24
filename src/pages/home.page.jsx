@@ -18,12 +18,17 @@ const HomePage = () => {
   const [show, setShow]  = useState(false)
   const [refetch, setRefetch] = useState(false)
   const [bucketId, setBucketId] = useState()
-  const [{ data, isFetching }, execute] = useFetch({ method: 'GET', url: `/matrix/sponsors/${bucketId}` }, false)
+  const [{ data, isFetching, error }, execute] = useFetch({ method: 'GET', url: `/matrix/sponsors/${bucketId}` }, false)
 
   const handleShow = (show, id) => {
     setShow(show)
     setBucketId(id)
+    console.log(show, id)
   }
+
+  useEffect(() => {
+    console.log(data, isFetching,error)
+  }, [data, isFetching, error]) 
 
   useEffect(() => {
     if (bucketId) execute()
@@ -104,6 +109,7 @@ const HomePage = () => {
         }}
       />
       {data?.AscendingLine && ListBucket}
+      {/* {ListBucket} */}
     </div>
   )
 }

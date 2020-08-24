@@ -10,6 +10,15 @@
     &:hover {
       color: #0A51A1;
     }
+
+    @include from(s) {
+      right: 1rem;
+      top: 1rem
+    }
+    @include from(360px) {
+      right: 0.3rem;
+      top: 0.5rem;
+    }
   }
 }
 .overlay {
