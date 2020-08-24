@@ -23,12 +23,7 @@ const HomePage = () => {
   const handleShow = (show, id) => {
     setShow(show)
     setBucketId(id)
-    console.log(show, id)
   }
-
-  useEffect(() => {
-    console.log(data, isFetching,error)
-  }, [data, isFetching, error]) 
 
   useEffect(() => {
     if (bucketId) execute()
