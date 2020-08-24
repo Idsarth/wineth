@@ -56,6 +56,7 @@ const SignInPage = () => {
           execute({ wallet: accounts[0] })
         }
       })
+      .catch(error => setError({ hasError: true, message: error.toString() }))
   }
 
   const onSubmitSystemId = () => {
