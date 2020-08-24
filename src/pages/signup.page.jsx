@@ -38,7 +38,6 @@ const SignUpPage = () => {
   }, [])
 
   useEffect(() => {
-    if(errorNetwork) alert(`error network ${errorNetwork.toString()}`)
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
     if (data.status === 400) setError({ hasError: true, message: data.message })
     if (data.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts })
@@ -54,7 +53,6 @@ const SignUpPage = () => {
         }
       })
       .catch((error) => {
-        alert(`error ${error.toString()}`)
         setError({ hasError: true, message: error.toString() })
       })
   }
@@ -62,7 +60,7 @@ const SignUpPage = () => {
   if (isLoggedIn) return <Redirect to='/' />
   return (
     <>
-      <SeoLayout title='Wineth - Sign Up' />
+      <SeoLayout title='Wineth - Sign up' />
       <div className='l-form'>
         <form className='form'>
           <div className='form-img'>

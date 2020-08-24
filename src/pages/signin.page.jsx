@@ -41,16 +41,8 @@ const SignInPage = () => {
   }
     detectProvider()
   }, [])
-
   useEffect(() => {
-    alert(`error => ${errorNetwork.toString()}`)
-    alert(`data => ${data?.status} ${data?.message} ${JSON.stringify(data)}`)
-  }, [errorNetwork, data])
-
-  useEffect(() => {
-    if(errorNetwork) alert(`error network ${errorNetwork.toString()}`)
     if (errorNetwork) setError({ hasError: true, message: errorNetwork.toString() })
-    if (data?.status === 400) setError({ hasError: true, message: data.message })
     if (data?.status === 200 && data.accessToken) signIn({ token: data.accessToken, account: accounts, isActive: data.isActiveBucket })
   }, [errorNetwork, data])
 
@@ -65,7 +57,6 @@ const SignInPage = () => {
         }
       })
       .catch((error) => {
-        alert(`error ${error.toString()}`)
         setError({ hasError: true, message: error.toString() })
       })
   }
@@ -79,7 +70,7 @@ const SignInPage = () => {
 
   return (
     <>
-      <SeoLayout title='Wineth - Sign In' />
+      <SeoLayout title='Wineth - Sign in' />
       <div className='l-form'>
         <form className='form'>
           <div className='form-img'>
