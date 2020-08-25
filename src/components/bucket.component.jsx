@@ -36,7 +36,11 @@ const Bucket = (props) => {
               <div className='bucket-loader'>
                 <Loader />
               </div>
-            ) : ( <Button disabled={active || !isEnabled} message='Activar' onClick={onClick} /> )}
+            ) : ( <Button 
+              disabled={active || !isEnabled} 
+              message={`${active ? 'Activada' : 'Activar'}`} 
+              onClick={onClick} 
+            /> )}
           </>
         ) : null}
       </div>
