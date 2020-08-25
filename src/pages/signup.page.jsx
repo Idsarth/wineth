@@ -73,7 +73,7 @@ const SignUpPage = () => {
             disabled
           />
           {error.hasError && <Error className='bottom' message={error.message} />}
-          <span className='form-message'>Inicia sesion con metamask para continuar.</span>
+          <span className='form-message'>Registrate para continuar.</span>
           {isFetching ? ( <Loader /> ) : (
             <Button
               variant
