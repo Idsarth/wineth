@@ -16,7 +16,7 @@ import Particle from '../components/particle.component'
 
 const useStyles = makeStyles({
   table: {
-    width: 700,
+    width: 800,
     backgroundColor: '#1A1C2D',
   },
   tableCell: {
@@ -27,10 +27,10 @@ const useStyles = makeStyles({
   }
 })
 
-const ProfitPage = (props) => {
+const DonationsPage = () => {
   const classes = useStyles()
   const { id } = useParams()
-  const [{ data, isFetching, error }] = useFetch({ method: 'GET', url: `/user/profits/getdata/${id}` })
+  const [{ data, isFetching, error }] = useFetch({ method: 'GET', url: `/user/profits/getsenddata/${id}` })
 
   if (error) return null
   if (isFetching) return <Loader />
@@ -42,21 +42,23 @@ const ProfitPage = (props) => {
             <TableRow>
               <TableCell className={classes.tableCell} align="center">ID</TableCell>
               <TableCell className={classes.tableCell} align="center">Hash</TableCell>
-              <TableCell className={classes.amount} align="right">Amount</TableCell>
+              <TableCell className={classes.tableCell} align="right">Amount</TableCell>
+              <TableCell className={classes.tableCell} align="right">Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data?.getProfits.length !== 0 ? data?.getProfits.map(profit => (
               <TableRow key={profit.id}>
-                <TableCell className={classes.tableCell}>{profit.user.id}</TableCell>
+                <TableCell className={classes.tableCell}>{profit.sender}</TableCell>
                 <TableCell align='center' className={classes.tableCell}>
-                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/address/${profit.user.hash}`}>{profit.user.hash}</a>
+                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/address/${profit.hash}`}>{profit.hash}</a>
                 </TableCell>
-                <TableCell align='right' className={classes.amount}>+{profit.amount}</TableCell>
+                <TableCell align='right' className={classes.tableCell}>+{profit.amount}</TableCell>
+                <TableCell align='right' className={classes.tableCell}>{profit.date}</TableCell>
               </TableRow>
             )) : (
               <TableRow>
-                <TableCell colSpan={3} className={classes.amount} align='center'>No hay data que mostrar</TableCell>
+                <TableCell colSpan={4} className={classes.tableCell} align='center'>No hay data que mostrar</TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -119,4 +121,4 @@ const ProfitPage = (props) => {
   )
 }
 
-export default ProfitPage
+export default DonationsPage

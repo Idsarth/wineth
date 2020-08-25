@@ -91,3 +91,12 @@
   align-items: center;
   justify-content: center;
 }
+
+
+.wallet_link {
+  color: #888ea8;
+  &:hover {
+    text-decoration: underline;
+    color: #090b1f;
+  }
+}
