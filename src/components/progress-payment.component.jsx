@@ -22,17 +22,38 @@ const ProgressPayment = (props) => {
   const [isReady, setIsReady] = useState(false)
   const [close, setClose] = useState(1)
   const [{ isFetching: isLoading, data: response }, execute] = useFetch({ url: '/transaction/validate', method: 'POST' }, false)
-  const [transaction, setTransaction] = useState({
-    step: 1,
-    error: { hasError: false, message: '' },
-    info: {
-      amount: data?.AscendingLine?.nivel1?.amount,
-      wallet: data?.AscendingLine?.nivel1?.address,
-      userId: data?.AscendingLine?.nivel1?.user,
-      wei: data?.AscendingLine?.nivel1?.wei,
-      status: data?.AscendingLine?.nivel1?.status
-    },
-    message: ''
+  const [transaction, setTransaction] = useState(() => {
+    let values = {}
+    let count = 0
+    console.log(data?.AscendingLine)
+    for (let key in data?.AscendingLine) {
+      count++
+      if(data?.AscendingLine[key].status === 'pending') {
+        console.log('Encontrado un proceso pago realizado => ', data?.AscendingLine[key])
+        console.log('Encontrado un proceso pago realizado => ', data?.AscendingLine[key].status)
+        values = {
+          amount: data?.AscendingLine[key].amount,
+          wallet: data?.AscendingLine[key].address,
+          userId: data?.AscendingLine[key].user,
+          wei: data?.AscendingLine[key].wei,
+          status: data?.AscendingLine[key].status,
+        }
+        break
+      }
+    }
+    const check = values?.amount ? true : false
+    return {
+      step: count !== 0 ? count : 1,
+      error: { hasError: false, message: '' },
+      info: {
+        amount: check ? values.amount : data?.AscendingLine?.nivel1?.amount,
+        wallet: check ? values.wallet : data?.AscendingLine?.nivel1?.address,
+        userId: check ? values.userId : data?.AscendingLine?.nivel1?.user,
+        wei: check <= 0 ? values.wei : data?.AscendingLine?.nivel1?.wei,
+        status: check <= 0 ? values.status : data?.AscendingLine?.nivel1?.status
+      },
+      message: ''
+    }
   })
 
   useEffect(() => {
