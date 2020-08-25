@@ -50,6 +50,7 @@ const ProgressPayment = (props) => {
       setTransaction(prevState => {
         if (prevState.step >= 3) {
           setClose(3)
+          window.location.reload()
           return {
             step: 1,
             error: { hasError: false, message: '' },

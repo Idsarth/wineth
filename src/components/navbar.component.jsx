@@ -39,7 +39,7 @@ const Navbar = (props) => {
           </div>
           {user?.isActive && (
             <ul className='nav-referer'>
-              <li className='nav-link'>http://localhost:3000/sign-up/{decode(user?.token).id}</li>
+              <li className='nav-link'>https://wineth.live/sign-up/{decode(user?.token).id}</li>
               <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000/sign-up/${decode(user?.token).id}`}>
                 <span className='nav-copy'>Copiar</span>
               </CopyToClipboard>
