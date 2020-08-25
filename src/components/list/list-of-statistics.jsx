@@ -32,12 +32,12 @@ const ListOfStatistics = (props) => {
     <>
       <Card
         logo={<FaEthereum className='home-icon' />}
-        title='Ganancias Ethereum'
+        title='Donaciones recibidas'
         total={response?.profits ? response.profits ? response.profits : 0 : data?.profits ? data.profits : 0}
       />
       <Card
         logo={<AiFillDollarCircle className='home-icon' />}
-        title='Ganancias en Dolares'
+        title='Donaciones en Dolares'
         total={`$${response?.usdProfits ? response.usdProfits ? response.usdProfits : '0.00' : data?.usdProfits ? data.usdProfits : '0.00'}`}
       />
       <Card
