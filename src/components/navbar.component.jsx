@@ -46,9 +46,11 @@ const Navbar = (props) => {
             </ul>
           )}
           {user?.isActive && (
-            <CopyToClipboard onCopy={() => setCopy(true)} text={`https://wineth.live/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
-              <span className='nav-copy'>Copiar link</span>
-            </CopyToClipboard>
+            <ul className='nav-referer-mobile'>
+              <CopyToClipboard onCopy={() => setCopy(true)} text={`https://wineth.live/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
+                <span className='nav-copy'>Copiar link</span>
+              </CopyToClipboard>
+            </ul>
           )}
         </div>
         <DropDown />
