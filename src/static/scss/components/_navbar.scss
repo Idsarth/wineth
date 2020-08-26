@@ -55,6 +55,9 @@
     &-breadcrumb {
       display: flex;
       list-style: none;
+      @include from(m) {
+        display: none;
+      }
       span {
         padding: 0 .5rem;
         color: #e0e6ed;
@@ -72,6 +75,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      @include from(m) {
+        margin-left: 0;
+      }
       img {
         height: 35px;
       }
@@ -88,6 +94,14 @@
 
       @include from(m) {
         display: none;
+      }
+
+      &-mobile {
+        display: none;
+
+        @include from(m) {
+          display: inline-block;
+        }
       }
     }
     &-link {

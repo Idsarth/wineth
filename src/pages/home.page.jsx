@@ -47,7 +47,7 @@ const HomePage = () => {
         <ListOfStatistics refetch={refetch} />
       </div>
       <main className='l-main'>
-        <ListOfBucket refetch={refetch}  id={user?.token ? decode(user.token).id : user?.id} onModal={handleShow} />
+        <ListOfBucket refetch={refetch}  id={user?.token ? decode(user.token)?.id : user?.id} onModal={handleShow} />
       </main>
 
       <Particle

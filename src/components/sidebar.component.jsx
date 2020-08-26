@@ -45,9 +45,9 @@ const SideBar = (props) => {
       <ul className='sidebar-list'>
         {options.map(opt => {
           let routeName = '/'
-          if (opt.routeName === '/partners') routeName = `${opt.routeName}/${user?.token ? decode(user.token).id : user.id }`
-          else if (opt.routeName === '/profits') routeName = `${opt.routeName}/${user?.token ? decode(user.token).id : user.id }`
-          else if (opt.routeName === '/donations') routeName = `${opt.routeName}/${user?.token ? decode(user.token).id : user.id }`
+          if (opt.routeName === '/partners') routeName = `${opt.routeName}/${user?.token ? decode(user?.token)?.id : user?.id }`
+          else if (opt.routeName === '/profits') routeName = `${opt.routeName}/${user?.token ? decode(user?.token)?.id : user?.id }`
+          else if (opt.routeName === '/donations') routeName = `${opt.routeName}/${user?.token ? decode(user?.token)?.id : user?.id }`
           else routeName = opt.routeName
 
           return (
