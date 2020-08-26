@@ -50,7 +50,7 @@ const ProfitPage = (props) => {
               <TableRow key={profit.id}>
                 <TableCell className={classes.tableCell}>{profit.user.id}</TableCell>
                 <TableCell align='center' className={classes.tableCell}>
-                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/address/${profit.user.hash}`}>{profit.user.hash}</a>
+                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/tx/${profit.hash}`}>{profit.hash}</a>
                 </TableCell>
                 <TableCell align='right' className={classes.amount}>+{profit.amount}</TableCell>
               </TableRow>

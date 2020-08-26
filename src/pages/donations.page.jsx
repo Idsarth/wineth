@@ -51,7 +51,7 @@ const DonationsPage = () => {
               <TableRow key={profit.id}>
                 <TableCell className={classes.tableCell}>{profit.sender}</TableCell>
                 <TableCell align='center' className={classes.tableCell}>
-                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/address/${profit.hash}`}>{profit.hash}</a>
+                  <a className='wallet_link' target="_blank" href={`https://etherscan.io/tx/${profit.hash}`}>{profit.hash}</a>
                 </TableCell>
                 <TableCell align='right' className={classes.tableCell}>+{profit.amount}</TableCell>
                 <TableCell align='right' className={classes.tableCell}>{profit.date}</TableCell>
