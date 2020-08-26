@@ -71,6 +71,7 @@ const ProgressPayment = (props) => {
       setTransaction(prevState => {
         if (prevState.step >= 3) {
           setClose(3)
+          reload({ token: user?.token, isActive: true, account: user.account })
           window.location.reload()
           return {
             step: 1,
