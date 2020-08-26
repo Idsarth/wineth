@@ -40,13 +40,13 @@ const Navbar = (props) => {
           {user?.isActive && (
             <ul className='nav-referer'>
               <li className='nav-link'>https://wineth.live/sign-up/{decode(user?.token).id}</li>
-              <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
+              <CopyToClipboard onCopy={() => setCopy(true)} text={`https://wineth.live/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
                 <span className='nav-copy'>Copiar</span>
               </CopyToClipboard>
             </ul>
           )}
           {user?.isActive && (
-            <CopyToClipboard onCopy={() => setCopy(true)} text={`http://localhost:3000/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
+            <CopyToClipboard onCopy={() => setCopy(true)} text={`https://wineth.live/sign-up/${user?.token ? decode(user?.token)?.id : user?.id }`}>
               <span className='nav-copy'>Copiar link</span>
             </CopyToClipboard>
           )}
