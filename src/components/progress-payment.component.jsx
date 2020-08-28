@@ -25,12 +25,9 @@ const ProgressPayment = (props) => {
   const [transaction, setTransaction] = useState(() => {
     let values = {}
     let count = 0
-    console.log(data?.AscendingLine)
     for (let key in data?.AscendingLine) {
       count++
       if(data?.AscendingLine[key].status === 'pending') {
-        console.log('Encontrado un proceso pago realizado => ', data?.AscendingLine[key])
-        console.log('Encontrado un proceso pago realizado => ', data?.AscendingLine[key].status)
         values = {
           amount: data?.AscendingLine[key].amount,
           wallet: data?.AscendingLine[key].address,
